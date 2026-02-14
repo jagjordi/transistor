@@ -12,8 +12,8 @@ android {
         applicationId "org.y20k.transistor"
         minSdkVersion 25
         targetSdkVersion 36
-        versionCode 112
-        versionName "4.3.5"
+        versionCode 113
+        versionName "4.3.6"
         resourceConfigurations += ['en', 'ar', 'ast', 'bg', 'ca', 'ckb', 'cs', 'cy', 'de', 'el', 'eo', 'es', 'et', 'eu', 'fi', 'fr', 'fy', 'ga', 'gl', 'hi', 'hr', 'hu', 'ia', 'id', 'it', 'iw', 'ja', 'ko', 'nb-rNO', 'nl', 'pl', 'pt', 'pt-rBR', 'ro', 'ru', 'sk', 'sl', 'sr', 'ta', 'tr', 'uk', 'zh-rCN']
         // languages listed here, should also be listed in /app/src/main/res/xml/locales_config.xml
     }
@@ -84,7 +84,7 @@ dependencies {
 
     implementation "com.google.android.material:material:1.14.0-alpha09"
 
-    implementation "androidx.activity:activity-ktx:1.12.3"
+    implementation "androidx.activity:activity-ktx:1.12.4"
     implementation "androidx.appcompat:appcompat:1.7.1"
     implementation "androidx.constraintlayout:constraintlayout:2.2.1"
     implementation "androidx.core:core-ktx:1.17.0"
