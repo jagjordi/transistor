@@ -73,7 +73,7 @@
     <string name="pref_about_title">Über</string>
     <string name="pref_m3u_export_title">M3U-Playlist exportieren</string>
     <string name="pref_m3u_export_summary">Speichert deine Radiosender in einer M3U-Playlistdatei, die in andere Player importiert werden kann.</string>
-    <string name="toast_message_save_m3u">Radiosender als M3U speichern…</string>
+    <string name="toast_message_save_m3u">Radiosender als M3U speichern …</string>
     <string name="toast_message_install_file_helper">Bitte installiere einen Dateimanager.</string>
     <string name="dialog_edit_save_changes">Änderungen speichern</string>
     <string name="dialog_edit_stream_uri">Stream-Adresse</string>
@@ -94,9 +94,9 @@
     <string name="pref_restore_summary">Wiederherstellen der Sammlung von Radiosendern aus einer Sicherung. Vorhandene Sender werden ersetzt.</string>
     <string name="toast_message_collection_backup">Radiosender sichern auf:</string>
     <string name="pref_buffer_size_title">Größeren Puffer verwenden</string>
-    <string name="pref_tap_anywhere_playback_summary_disabled">Tippe auf die Wiedergabetaste, um einen Radiosender zu hören.</string>
-    <string name="pref_tap_anywhere_playback_summary_enabled">Tippe auf eine beliebige Stelle auf der Karte eines Radiosenders, um ihn zu hören.</string>
-    <string name="pref_tap_anywhere_playback_title">Tippe auf den Radiosender</string>
+    <string name="pref_tap_anywhere_playback_summary_disabled">Auf die Wiedergabetaste tippen, um einen Radiosender zu hören.</string>
+    <string name="pref_tap_anywhere_playback_summary_enabled">Auf eine beliebige Stelle auf der Karte eines Radiosenders tippen, um ihn zu hören.</string>
+    <string name="pref_tap_anywhere_playback_title">Auf den Radiosender tippen</string>
     <string name="descr_expanded_player_metadata_copy_button">Informationen zur aktuellen Wiedergabe kopieren</string>
     <string name="pref_buffer_size_summary_disabled">Verwendung der Standardpuffergröße für die Wiedergabe eines Radiostreams.</string>
     <string name="pref_buffer_size_summary_enabled">Größerer Puffer für die Wiedergabe eines Radiostreams aktiviert. Es kann länger dauern, bis die Wiedergabe beginnt.</string>
@@ -106,7 +106,7 @@
     <string name="dialog_restore_collection_replace_existing">Aktuelle Sammlung von Radiosendern mit dem Radiosender aus der Sicherung ersetzen\?</string>
     <string name="cast_context_error">Cast-Kontext konnte nicht abgerufen werden. Versuche, Google Play Services zu aktualisieren und starte die App neu.</string>
     <string name="toast_message_error_station_not_found">Sender nicht gefunden.</string>
-    <string name="descr_back_icon">Zurück gehen</string>
+    <string name="descr_back_icon">Zurückgehen</string>
     <string name="notification_cancel">Abbrechen</string>
     <string name="pref_dynamic_colors_summary_enabled">Systemakzentfarben für Bedienelemente verwenden.</string>
     <string name="pref_dynamic_colors_summary_disabled">Standardfarben der App für Bedienelemente verwenden.</string>
