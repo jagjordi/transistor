@@ -108,4 +108,11 @@
     <string name="descr_back_icon">Вернуться</string>
     <string name="cast_context_error">Не удалось получить контекст Cast. Попробуйте обновить Службы Google Play и перезапустить приложение.</string>
     <string name="notification_cancel">Отменить</string>
+    <string name="pref_dynamic_colors_summary_enabled">Использовать системные цвета акцента для элементов интерфейса.</string>
+    <string name="pref_dynamic_colors_summary_disabled">Использовать цвета приложения по умолчанию для элементов интерфейса.</string>
+    <string name="pref_dynamic_colors_title">Динамические цвета</string>
+    <string name="pref_user_interface_transparency_effect_summary_enabled">Элементы управления воспроизведением становятся прозрачными при прокрутке.</string>
+    <string name="pref_user_interface_transparency_effect_summary_disabled">Элементы управления воспроизведением остаются непрозрачными при прокрутке.</string>
+    <string name="pref_user_interface_transparency_effect_title">Эффект прозрачности пользовательского интерфейса</string>
+    <string name="descr_expanded_player_streaming_link_icon">Значок заметки</string>
 </resources>
