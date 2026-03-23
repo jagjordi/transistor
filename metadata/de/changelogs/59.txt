@@ -3,4 +3,4 @@
 **2018-08-08**
 
 - Metadatenanzeige kann UTF-8 und Latin1-Zeichen verarbeiten
-- aktualisierte Übersetzungen
+- Übersetzungen aktualisiert
