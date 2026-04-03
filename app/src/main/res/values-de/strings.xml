@@ -62,7 +62,7 @@
     <string name="dialog_find_station_title">Sender suchen</string>
     <string name="dialog_find_station_hint">Name oder Streamadresse</string>
     <string name="descr_dialog_edit_place_on_home_screen_icon">Auf dem Startbildschirm platzieren</string>
-    <string name="onboarding_app_import_running">Deine Sender werden importiert …</string>
+    <string name="onboarding_app_import_running">Deine Sender werden importiert…</string>
     <string name="toast_message_updating_station_images">Aktualisierung der Senderbilder.</string>
     <string name="toast_message_error_restart_playback_failed">Die Wiedergabe konnte nicht neu gestartet werden.</string>
     <string name="toast_message_error_download_error">Fehler beim Herunterladen</string>
@@ -72,8 +72,8 @@
     <string name="pref_app_version_summary">Version</string>
     <string name="pref_about_title">Über</string>
     <string name="pref_m3u_export_title">M3U-Playlist exportieren</string>
-    <string name="pref_m3u_export_summary">Deine Radiosender in einer M3U-Playlistdatei sichern, die in andere Player importiert werden kann.</string>
-    <string name="toast_message_save_m3u">Radiosender als M3U speichern …</string>
+    <string name="pref_m3u_export_summary">Deine Radiosender in einer M3U-Playlistdatei speichern, die in andere Player importiert werden kann.</string>
+    <string name="toast_message_save_m3u">Radiosender als M3U speichern…</string>
     <string name="toast_message_install_file_helper">Bitte installiere einen Dateimanager.</string>
     <string name="dialog_edit_save_changes">Änderungen speichern</string>
     <string name="dialog_edit_stream_uri">Stream-Adresse</string>
