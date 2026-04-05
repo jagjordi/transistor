@@ -107,4 +107,11 @@
     <string name="shortcut_last_station_long_label">கடைசி நிலையத்தை விளையாடுங்கள்</string>
     <string name="shortcut_last_station_disabled_message">கடைசி நிலையத்தின் பின்னணியில் குறுக்குவழி முடக்கப்பட்டது.</string>
     <string name="cast_context_error">நடிகர்கள் சூழலைப் பெறுவதில் தோல்வி. Google Play சேவைகளைப் புதுப்பிக்க முயற்சிக்கவும், பயன்பாட்டை மறுதொடக்கம் செய்யவும்.</string>
+    <string name="pref_dynamic_colors_summary_enabled">இடைமுகம் உறுப்புகளுக்கு கணினி உச்சரிப்பு வண்ணங்களைப் பயன்படுத்துதல்.</string>
+    <string name="pref_dynamic_colors_summary_disabled">இடைமுகம் உறுப்புகளுக்கு ஆப்சின் இயல்புநிலை வண்ணங்களைப் பயன்படுத்துதல்.</string>
+    <string name="pref_dynamic_colors_title">மாறும் நிறங்கள்</string>
+    <string name="pref_user_interface_transparency_effect_summary_enabled">நீங்கள் உருட்டும் போது பிளேபேக் கட்டுப்பாடுகள் வெளிப்படையானதாக மாறும்.</string>
+    <string name="pref_user_interface_transparency_effect_summary_disabled">ச்க்ரோலிங் செய்யும் போது பிளேபேக் கட்டுப்பாடுகள் ஒளிபுகா நிலையில் இருக்கும்.</string>
+    <string name="pref_user_interface_transparency_effect_title">பயனர் இடைமுகத்தின் வெளிப்படைத்தன்மை விளைவு</string>
+    <string name="descr_expanded_player_streaming_link_icon">குறிப்பு படவுரு</string>
 </resources>
