@@ -104,4 +104,15 @@
     <string name="descr_expanded_player_sleep_timer_remaining_time">Zvyšný čas na časovači spánku</string>
     <string name="descr_expanded_player_sleep_timer_start_button">Spustiť časovač spánku</string>
     <string name="descr_expanded_player_metadata_next_button">Ďalší záznam metadát práve hrajúceho</string>
+    <string name="toast_message_error_station_not_found">Stanica nenájdená.</string>
+    <string name="notification_cancel">Zrušiť</string>
+    <string name="pref_dynamic_colors_summary_enabled">Použitie systémových akcentových farieb pre prvky používateľského rozhrania.</string>
+    <string name="pref_dynamic_colors_summary_disabled">Použitie predvolených farieb aplikácie pre prvky používateľského rozhrania.</string>
+    <string name="pref_dynamic_colors_title">Dynamické farby</string>
+    <string name="pref_user_interface_transparency_effect_summary_enabled">Ovládanie prehrávania sa pri posúvaní spriehľadní.</string>
+    <string name="pref_user_interface_transparency_effect_summary_disabled">Ovládanie prehrávania zostane pri posúvaní nepriehľadné.</string>
+    <string name="pref_user_interface_transparency_effect_title">Efekt priehľadnosti používateľského rozhrania</string>
+    <string name="descr_back_icon">Prejsť späť</string>
+    <string name="descr_expanded_player_streaming_link_icon">Ikona poznámky</string>
+    <string name="cast_context_error">Nepodarilo sa získať vysielaný obsah. Skúste aktualizovať službu Google Play Services a reštartovať aplikáciu.</string>
 </resources>
