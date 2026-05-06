@@ -1,6 +1,6 @@
-# PROJECT_BRIEF — transistor
+# PROJECT_BRIEF — Transistor
 
-Reference brief for transistor, read by the planning AI at the start
+Reference brief for Transistor, read by the planning AI at the start
 of every task and by the coding AI for the Build section. Keep it
 terse and factual; no prose for human readers.
 
@@ -69,8 +69,7 @@ Minimalist Android internet radio player; imports M3U/PLS streams, searches radi
 
 ## Build
 - Wrapper present. Debug APK: `./gradlew assembleDebug`. Release APK: `./gradlew assembleRelease`.
-- Source/target compat: Java 8 / Kotlin JVM target 1.8.
-- **JDK / Android SDK / build-tools:** no pinned versions — uses whatever Android Studio provides.
+- **Toolchain:** Java/Kotlin target pinned in build.gradle; JDK and Android build-tools unpinned — use Android Studio's bundled versions.
 - `local.properties` must define `sdk.dir`. No other entries required by the build script.
 - Release: `minifyEnabled true`, `shrinkResources true`, R8 with `proguard-rules.pro`.
 - No product flavors. No `signingConfigs` in `app/build.gradle` — release signing done manually via Android Studio.
