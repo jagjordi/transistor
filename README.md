@@ -15,6 +15,13 @@ You can install Transistor via F-Droid or IzzyOnDroid.
 
 [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="Get it on F-Droid" height="80">](https://f-droid.org/repository/browse/?fdid=org.y20k.transistor) [<img src="https://gitlab.com/IzzyOnDroid/repo/-/raw/master/assets/IzzyOnDroid.png" alt="Get it on IzzyOnDroid" height="80">](https://apt.izzysoft.de/packages/org.y20k.transistor/)
 
+## Verify APK
+APKs published on Codeberg Releases are signed with the following certificate.
+
+```
+SHA-256: 61:05:14:5F:84:E5:CB:D6:97:F0:F6:E1:2C:97:77:04:2E:9B:2D:B6:67:A7:FF:0D:A4:12:F6:74:35:31:6D:D8
+```
+
 ## Frequent Questions
 
 ### How can I add a radio station?
