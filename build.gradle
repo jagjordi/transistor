@@ -2,8 +2,8 @@
 
 buildscript {
     ext {
-        kotlinVersion = '2.3.10'
-        gradlePluginVersion = '8.13.2'
+        kotlinVersion = '2.3.21'
+        gradlePluginVersion = '9.2.1'
     }
 
     repositories {
@@ -27,5 +27,5 @@ allprojects {
 }
 
 task clean(type: Delete) {
-    delete rootProject.buildDir
+    delete rootProject.layout.buildDirectory
 }
