@@ -4,7 +4,8 @@ Transistor ist freie Software. Sie wird unter der MIT-Open-Source-Lizenz veröff
 
 APK ÜBERPRÜFEN
 ----------------
-Die auf Codeberg Releases veröffentlichten APKs sind mit dem folgenden Zertifikat signiert.
+
+Die auf Codeberg veröffentlichten APKs sind mit dem folgenden Zertifikat signiert.
 SHA-256: 61:05:14:5F:84:E5:CB:D6:97:F0:F6:E1:2C:97:77:04:2E:9B:2D:B6:67:A7:FF:0D:A4:12:F6:74:35:31:6D:D8
 
 HÄUFIGE FRAGEN
