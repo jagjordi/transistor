@@ -108,4 +108,7 @@
     <string name="cast_context_error">No se pudo obtener el contexto de Cast. Intenta actualizar los servicios de Google Play y reinicia la aplicación.</string>
     <string name="notification_cancel">Cancelar</string>
     <string name="descr_back_icon">Volver atrás</string>
+    <string name="pref_dynamic_colors_summary_enabled">Uso de los colores de acento del sistema para los elementos de la interfaz de usuario.</string>
+    <string name="pref_dynamic_colors_summary_disabled">Utilizar los colores predeterminados de la aplicación para los elementos de la interfaz de usuario.</string>
+    <string name="pref_dynamic_colors_title">Colores dinámicos</string>
 </resources>
