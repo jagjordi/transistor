@@ -1,1 +1,1 @@
-Transistor - Aplicación de radio simple
+Transistor - App de radio simple
