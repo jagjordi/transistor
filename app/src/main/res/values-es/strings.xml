@@ -111,4 +111,5 @@
     <string name="pref_dynamic_colors_summary_enabled">Uso de los colores de acento del sistema para los elementos de la interfaz de usuario.</string>
     <string name="pref_dynamic_colors_summary_disabled">Utilizar los colores predeterminados de la aplicación para los elementos de la interfaz de usuario.</string>
     <string name="pref_dynamic_colors_title">Colores dinámicos</string>
+    <string name="descr_expanded_player_streaming_link_icon">Icono de nota</string>
 </resources>
