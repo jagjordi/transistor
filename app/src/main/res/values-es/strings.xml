@@ -112,4 +112,7 @@
     <string name="pref_dynamic_colors_summary_disabled">Utilizar los colores predeterminados de la aplicación para los elementos de la interfaz de usuario.</string>
     <string name="pref_dynamic_colors_title">Colores dinámicos</string>
     <string name="descr_expanded_player_streaming_link_icon">Icono de nota</string>
+    <string name="pref_user_interface_transparency_effect_summary_enabled">Controles pre‐grabados se vuelven transparentes al arrastrar.</string>
+    <string name="pref_user_interface_transparency_effect_summary_disabled">Controles pre‐grabados se mantienen opacos durante el arrastrado.</string>
+    <string name="pref_user_interface_transparency_effect_title">Efecto de transparencia del interfaz de usuario</string>
 </resources>
