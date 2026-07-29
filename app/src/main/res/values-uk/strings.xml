@@ -108,4 +108,7 @@
     <string name="cast_context_error">Не вдалося отримати контекст Cast. Спробуйте оновити Служби Google Play і перезапустіть застосунок.</string>
     <string name="descr_back_icon">Назад</string>
     <string name="notification_cancel">Скасувати</string>
+    <string name="pref_dynamic_colors_title">Динамічні кольори</string>
+    <string name="pref_dynamic_colors_summary_disabled">Використовувати типові кольори застосунку для елементів інтерфейсу.</string>
+    <string name="pref_dynamic_colors_summary_enabled">Використовувати основні системні кольори для елементів інтерфейсу.</string>
 </resources>
