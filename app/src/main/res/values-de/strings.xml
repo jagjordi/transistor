@@ -7,7 +7,7 @@
     <string name="shortcut_last_station_disabled_message">Shortcut für Wiedergabe des letzten Senders deaktiviert.</string>
     <string name="descr_app_icon">App-Symbol in der Form eines alten Radios</string>
     <string name="player_sheet_h2_station_metadata">Momentan läuft</string>
-    <string name="player_sheet_h2_stream_url">Streamingadresse</string>
+    <string name="player_sheet_h2_stream_url">Streaminglink</string>
     <string name="dialog_generic_button_okay">OK</string>
     <string name="dialog_generic_button_cancel">Abbrechen</string>
     <string name="dialog_error_message_default">Ein Fehler ist aufgetreten</string>
@@ -62,7 +62,7 @@
     <string name="dialog_find_station_title">Sender suchen</string>
     <string name="dialog_find_station_hint">Name oder Streamadresse</string>
     <string name="descr_dialog_edit_place_on_home_screen_icon">Auf dem Startbildschirm platzieren</string>
-    <string name="onboarding_app_import_running">Deine Sender werden importiert…</string>
+    <string name="onboarding_app_import_running">Deine Sender werden importiert …</string>
     <string name="toast_message_updating_station_images">Aktualisierung der Senderbilder.</string>
     <string name="toast_message_error_restart_playback_failed">Die Wiedergabe konnte nicht neu gestartet werden.</string>
     <string name="toast_message_error_download_error">Fehler beim Herunterladen</string>
@@ -73,10 +73,10 @@
     <string name="pref_about_title">Über</string>
     <string name="pref_m3u_export_title">M3U-Playlist exportieren</string>
     <string name="pref_m3u_export_summary">Deine Radiosender in einer M3U-Playlistdatei speichern, die in andere Player importiert werden kann.</string>
-    <string name="toast_message_save_m3u">Radiosender als M3U speichern…</string>
+    <string name="toast_message_save_m3u">Radiosender als M3U speichern …</string>
     <string name="toast_message_install_file_helper">Bitte installiere einen Dateimanager.</string>
     <string name="dialog_edit_save_changes">Änderungen speichern</string>
-    <string name="dialog_edit_stream_uri">Stream-Adresse</string>
+    <string name="dialog_edit_stream_uri">Streamadresse</string>
     <string name="station_list_button_settings">Einstellungen</string>
     <string name="pref_advanced_title">Erweitert</string>
     <string name="pref_edit_station_summary_disabled">Bearbeitung der Senderinformationen deaktiviert.</string>
@@ -86,7 +86,7 @@
     <string name="pref_edit_station_stream_title">Streaminglinks bearbeiten</string>
     <string name="descr_card_station_image_change">Senderbild ändern</string>
     <string name="dialog_edit_station_name">Sendername</string>
-    <string name="pref_edit_station_stream_summary_enabled">Bearbeitung von Streaming-Links ist aktiviert. Stelle sicher, dass du eine korrekte Stream-Adresse eingibst.</string>
+    <string name="pref_edit_station_stream_summary_enabled">Bearbeitung von Streaminglinks ist aktiviert. Stelle sicher, dass du eine korrekte Stream-Adresse eingibst.</string>
     <string name="pref_backup_title">Sender sichern</string>
     <string name="pref_backup_summary">Sammlung der Radiosender einschließlich ihrer Bilder im Gerätespeicher sichern.</string>
     <string name="toast_message_collection_restore">Wiederherstellen der Radiosender aus einer Sicherung.</string>
