@@ -201,8 +201,13 @@ object Keys {
     const val RADIO_BROWSER_API_BASE: String = "all.api.radio-browser.info"
     const val RADIO_BROWSER_API_DEFAULT: String = "de1.api.radio-browser.info"
 
-    // web browser user agent
-    val WEB_BROWSER_USER_AGENT_REQUIRED: Array<String> = arrayOf("live365.com")
+    // default user agent
+    val USER_AGENT: String = "$APPLICATION_NAME/${BuildConfig.VERSION_NAME}"
+
+    // web browser user agent - hostnames listed here get WEB_BROWSER_USER_AGENT instead of USER_AGENT
+    // empty on purpose: no station is known to need it. Last resort only - masking as a web browser broke playback on many servers in 2025 (see commit 5bbc59fa)
+    // note: servers that reject Transistor usually reject Android's default "Dalvik/..." user agent, which USER_AGENT already avoids
+    val WEB_BROWSER_USER_AGENT_REQUIRED: Array<String> = arrayOf()
     const val WEB_BROWSER_USER_AGENT: String = "Mozilla/5.0 (Linux; Android 13; SM-G998B) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Mobile Safari/537.36"
 
     // locations

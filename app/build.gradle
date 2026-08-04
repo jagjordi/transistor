@@ -28,7 +28,7 @@ android {
     }
 
     buildFeatures {
-        buildConfig = true // Ensure this is true (or remove the line, as it's true by default)
+        buildConfig = true // required - do not remove: since AGP 8 BuildConfig is opt-in, Keys.USER_AGENT and SettingsFragment need BuildConfig.VERSION_NAME
     }
 
     buildTypes {

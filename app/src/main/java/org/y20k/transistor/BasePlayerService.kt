@@ -545,7 +545,8 @@ abstract class BasePlayerService: MediaLibraryService() {
      */
     private val customMediaSourceFactory by lazy {
         object : MediaSource.Factory {
-            val defaultHttpDataSourceFactory = DefaultHttpDataSource.Factory() // use the default user agent
+            val defaultHttpDataSourceFactory = DefaultHttpDataSource.Factory()
+                .setUserAgent(Keys.USER_AGENT)
             val defaultDataSourceFactory = DefaultDataSource.Factory(this@BasePlayerService, defaultHttpDataSourceFactory)
             val defaultMediaSourceFactory = DefaultMediaSourceFactory(defaultDataSourceFactory)
                 .setLoadErrorHandlingPolicy(loadErrorHandlingPolicy)

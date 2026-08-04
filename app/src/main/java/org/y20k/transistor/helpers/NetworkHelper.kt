@@ -139,6 +139,8 @@ object NetworkHelper {
     fun downloadPlaylist(playlistUrlString: String): List<String> {
         val lines = mutableListOf<String>()
         val connection = URL(playlistUrlString).openConnection()
+        // add user agent
+        connection.setRequestProperty("User-Agent", Keys.USER_AGENT)
         val reader = connection.getInputStream().bufferedReader()
         reader.useLines { sequence ->
             sequence.take(100).forEach { line ->
@@ -183,7 +185,8 @@ object NetworkHelper {
             // try to open connection and get status
             Log.i(TAG, "Opening http connection.")
             connection = URL(urlString).openConnection() as HttpURLConnection
-            // add user agent if required
+            // add user agent - and mask as web browser if required
+            connection.setRequestProperty("User-Agent", Keys.USER_AGENT)
             for (hostname in Keys.WEB_BROWSER_USER_AGENT_REQUIRED) {
                 if (urlString.contains(hostname, ignoreCase = true)) {
                     connection.setRequestProperty("User-Agent", Keys.WEB_BROWSER_USER_AGENT)
