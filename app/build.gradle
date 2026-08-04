@@ -12,8 +12,8 @@ android {
         applicationId "org.y20k.transistor"
         minSdkVersion 25
         targetSdkVersion 37
-        versionCode 114
-        versionName "4.3.7"
+        versionCode 115
+        versionName "4.3.8"
         resourceConfigurations += ['en', 'ar', 'ast', 'bg', 'ca', 'ckb', 'cs', 'cy', 'de', 'el', 'eo', 'es', 'et', 'eu', 'fi', 'fr', 'fy', 'ga', 'gl', 'hi', 'hr', 'hu', 'ia', 'id', 'it', 'iw', 'ja', 'ko', 'nb-rNO', 'nl', 'pl', 'pt', 'pt-rBR', 'ro', 'ru', 'sk', 'sl', 'sr', 'ta', 'tr', 'uk', 'zh-rCN']
         // languages listed here, should also be listed in /app/src/main/res/xml/locales_config.xml
     }
@@ -86,7 +86,7 @@ dependencies {
 
     implementation "androidx.activity:activity-ktx:1.13.0"
     implementation "androidx.appcompat:appcompat:1.7.1"
-    implementation "androidx.constraintlayout:constraintlayout:2.2.1"
+    implementation "androidx.constraintlayout:constraintlayout:2.2.2"
     implementation "androidx.core:core-ktx:1.19.0"
     implementation "androidx.palette:palette-ktx:1.0.0"
     implementation "androidx.preference:preference-ktx:1.2.1"
@@ -107,6 +107,6 @@ dependencies {
     implementation "com.google.code.gson:gson:2.14.0"
     implementation 'com.android.volley:volley:1.2.1'
 
-    implementation "com.github.bumptech.glide:glide:5.0.7"
+    implementation "com.github.bumptech.glide:glide:5.0.9"
 
 }

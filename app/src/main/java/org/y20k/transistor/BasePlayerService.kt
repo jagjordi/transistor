@@ -334,6 +334,18 @@ abstract class BasePlayerService: MediaLibraryService() {
             return Futures.immediateFuture(updatedMediaItems)
         }
 
+        override fun onSetMediaItems(mediaSession: MediaSession, controller: MediaSession.ControllerInfo, mediaItems: MutableList<MediaItem>, startIndex: Int, startPositionMs: Long): ListenableFuture<MediaSession.MediaItemsWithStartPosition> {
+            // replace the requested station with the whole collection, so that skip to next/previous can move between stations
+            val requestedMediaItem: MediaItem? = mediaItems.getOrNull(startIndex) ?: mediaItems.firstOrNull()
+            val stationPosition: Int = CollectionHelper.getStationPosition(collection, requestedMediaItem?.mediaId ?: String())
+            if (stationPosition == -1) {
+                // station is not part of the collection - keep the request as it is
+                return super.onSetMediaItems(mediaSession, controller, mediaItems, startIndex, startPositionMs)
+            }
+            val stations: MutableList<MediaItem> = CollectionHelper.getStationsAsMediaItems(this@BasePlayerService, collection)
+            return Futures.immediateFuture(MediaSession.MediaItemsWithStartPosition(stations, stationPosition, startPositionMs))
+        }
+
         override fun onGetItem(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, mediaId: String): ListenableFuture<LibraryResult<MediaItem>> {
             val item: MediaItem = CollectionHelper.getStationItem(this@BasePlayerService, collection, mediaId)
             return Futures.immediateFuture(LibraryResult.ofItem(item, /* params= */ null))
@@ -371,9 +383,11 @@ abstract class BasePlayerService: MediaLibraryService() {
         override fun onPlaybackResumption(mediaSession: MediaSession, controller: MediaSession.ControllerInfo ): ListenableFuture<MediaSession.MediaItemsWithStartPosition> {
             val future = SettableFuture.create<MediaSession.MediaItemsWithStartPosition>()
             CoroutineScope(Main).launch {
-                val recentMediaItem: MediaItem? = CollectionHelper.getRecent(this@BasePlayerService, collection)
-                val result: MediaSession.MediaItemsWithStartPosition = if (recentMediaItem != null) {
-                    MediaSession.MediaItemsWithStartPosition(listOf(recentMediaItem), 0, C.TIME_UNSET)
+                // resume with the whole collection, so that skip to next/previous can move between stations
+                val stations: MutableList<MediaItem> = CollectionHelper.getStationsAsMediaItems(this@BasePlayerService, collection)
+                val stationPosition: Int = PreferencesHelper.loadLastPlayedStationPosition()
+                val result: MediaSession.MediaItemsWithStartPosition = if (stationPosition in stations.indices) {
+                    MediaSession.MediaItemsWithStartPosition(stations, stationPosition, C.TIME_UNSET)
                 } else {
                     MediaSession.MediaItemsWithStartPosition(emptyList(), C.INDEX_UNSET, C.TIME_UNSET)
                 }
@@ -599,6 +613,12 @@ abstract class BasePlayerService: MediaLibraryService() {
             }
             override fun isCommandAvailable(command: Int): Boolean {
                 return availableCommands.contains(command)
+            }
+            override fun seekToNext() {
+                seekToNextMediaItem()
+            }
+            override fun seekToPrevious() {
+                seekToPreviousMediaItem()
             }
             override fun getDuration(): Long {
                 return C.TIME_UNSET // this will hide progress bar for HLS stations in the notification
