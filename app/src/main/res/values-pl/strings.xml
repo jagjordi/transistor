@@ -7,7 +7,7 @@
     <string name="shortcut_last_station_disabled_message">Skrót do odtwarzania ostatniej stacji jest wyłączony.</string>
     <string name="descr_app_icon">Ikona aplikacji przedstawiająca stare radio</string>
     <string name="player_sheet_h2_station_metadata">Teraz odtwarzane</string>
-    <string name="player_sheet_h2_stream_url">URL strumienia</string>
+    <string name="player_sheet_h2_stream_url">Link do streamingu</string>
     <string name="dialog_generic_button_okay">OK</string>
     <string name="dialog_generic_button_cancel">Anuluj</string>
     <string name="dialog_error_message_default">Wystąpił błąd</string>
@@ -109,4 +109,10 @@
     <string name="descr_back_icon">Nawiguj wstecz</string>
     <string name="notification_cancel">Anuluj</string>
     <string name="pref_dynamic_colors_title">Dynamiczne kolory</string>
+    <string name="pref_dynamic_colors_summary_enabled">Kolory aplikacji będą automatycznie dopasowywane do systemu.</string>
+    <string name="pref_dynamic_colors_summary_disabled">Elementy interfejsu będą wyświetlane w domyślnych kolorach systemu.</string>
+    <string name="pref_user_interface_transparency_effect_summary_enabled">Przyciski odtwarzacza stają się przezroczyste podczas przewijania.</string>
+    <string name="pref_user_interface_transparency_effect_summary_disabled">Przyciski odtwarzacza pozostają widoczne podczas przewijania.</string>
+    <string name="pref_user_interface_transparency_effect_title">Efekt przezroczystości interfejsu</string>
+    <string name="descr_expanded_player_streaming_link_icon">Ikona notatki</string>
 </resources>
