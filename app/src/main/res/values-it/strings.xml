@@ -53,7 +53,7 @@
     <string name="dialog_yes_no_message_remove_station">Eliminare questa stazione\?</string>
     <string name="dialog_opml_import_details_default">Nessun dettaglio</string>
     <string name="dialog_generic_details_button">Mostra dettagli</string>
-    <string name="dialog_find_station_title">Trova stazione</string>
+    <string name="dialog_find_station_title">Trova Stazione</string>
     <string name="dialog_find_station_no_results">Nessun risultato.</string>
     <string name="dialog_find_station_hint">Nome o indirizzo stream</string>
     <string name="dialog_find_station_button_add">Aggiungi</string>
@@ -107,4 +107,11 @@
     <string name="cast_context_error">Non è riuscito a ottenere contesto Cast. Cerca di aggiornare Google Play Services e riavviare l\'app.</string>
     <string name="notification_cancel">Annulla</string>
     <string name="descr_back_icon">Torna indietro</string>
+    <string name="pref_dynamic_colors_summary_enabled">Utilizzo dei system accent colors per gli elementi dell\'interfaccia utente.</string>
+    <string name="pref_dynamic_colors_summary_disabled">Utilizzo di colori predefiniti dell\'app per gli elementi dell\'interfaccia utente.</string>
+    <string name="pref_dynamic_colors_title">Colori dinamici</string>
+    <string name="pref_user_interface_transparency_effect_summary_enabled">I controlli di riproduzione diventano trasparenti mentre scorri.</string>
+    <string name="pref_user_interface_transparency_effect_summary_disabled">I controlli di riproduzione rimangono opachi durante lo scorrimento.</string>
+    <string name="pref_user_interface_transparency_effect_title">Effetto di trasparenza dell\'interfaccia utente</string>
+    <string name="descr_expanded_player_streaming_link_icon">Nota Icona</string>
 </resources>
