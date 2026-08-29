@@ -1,23 +1,17 @@
-Transistor è un'app radio dall'approccio minimalista, che potrebbe non piacere a tutti. Non dispone di una funzione per la scoperta di stazioni radio. Transistor offre solo una semplicissima opzione di ricerca e importa i link di streaming audio quando vengono cliccati in un browser web.
+Transistor è un'app radio dal design minimalista, che potrebbe non piacere a tutti. Non include una funzione per scoprire stazioni radio. Offre solo una ricerca molto semplice e importa i link di streaming audio quando li apri dal browser. Transistor è software libero. È rilasciato sotto licenza open-source MIT.
 
-Transistor è un software libero. È pubblicato sotto licenza open source MIT.
+### VERIFICA APK
 
-VERIFICA L'APK
-----------
+Gli APK pubblicati nelle Release di Codeberg sono firmati con il seguente certificato.
+`SHA-256: 61:05:14:5F:84:E5:CB:D6:97:F0:F6:E1:2C:97:77:04:2E:9B:2D:B6:67:A7:FF:0D:A4:12:F6:74:35:31:6D:D8`
 
-Gli APK pubblicati su Codeberg Releases sono firmati con il seguente certificato.
+### DOMANDE FREQUENTI
 
-SHA-256: 61:05:14:5F:84:E5:CB:D6:97:F0:F6:E1:2C:97:77:04:2E:9B:2D:B6:67:A7:FF:0D:A4:12:F6:74:35:31:6D:D8
+#### COME POSSO AGGIUNGERE UNA STAZIONE RADIO
+Ci sono tre modi per aggiungere una stazione radio a Transistor: usa la Ricerca, aggiungi l'indirizzo di un file playlist (M3U, PLS), inserisci l'indirizzo diretto dello stream.
 
-DOMANDE FREQUENTI
-------------------
+#### DA DOVE PROVENGONO I RISULTATI DI RICERCA DELLE STAZIONI RADIO?
+Transistor cerca nel database online radio-browser.info. Puoi aiutare la community di radio-browser.info aggiungendo la stazione mancante (http://www.radio-browser.info/gui/#!/add) al loro database.
 
-COME POSSO AGGIUNGERE UNA STAZIONE RADIO?
-Ci sono tre modi per aggiungere una stazione radio a Transistor: utilizzare la funzione di ricerca, aggiungere l'indirizzo del file della playlist (M3U, PLS) o inserire l'indirizzo di un flusso audio grezzo.
-
-DA DOVE PROVENGONO I RISULTATI DELLA RICERCA DELLE STAZIONI RADIO?
-Transistor effettua una ricerca nel database online radio-browser.info. Puoi aiutare la community di radio-browser.info aggiungendo la stazione mancante (http://www.radio-browser.info/gui/#!/add) al loro database.
-
-COME POSSO PERSONALIZZARE L'ELENCO DELLE STAZIONI RADIO?
-
-Utilizza il gesto di scorrimento per eliminare una stazione radio dall'elenco. Ulteriori opzioni di modifica possono essere abilitate nelle Impostazioni. Se abilitate, tieni premuta una stazione radio per modificarne il nome, l'immagine o il link di streaming.
+#### COME POSSO GESTIRE LA LISTA DELLE STAZIONI RADIO?
+Usa il gesto di scorrimento per eliminare una stazione radio dalla lista. Altre opzioni di modifica possono essere abilitate nelle Impostazioni. Se abilitate, tieni premuta una stazione radio per modificarne nome, immagine o link di streaming.
