@@ -107,10 +107,10 @@
     <string name="cast_context_error">Non è riuscito a ottenere contesto Cast. Cerca di aggiornare Google Play Services e riavviare l\'app.</string>
     <string name="notification_cancel">Annulla</string>
     <string name="descr_back_icon">Torna indietro</string>
-    <string name="pref_dynamic_colors_summary_enabled">Utilizzo dei system accent colors per gli elementi dell\'interfaccia utente.</string>
-    <string name="pref_dynamic_colors_summary_disabled">Utilizzo di colori predefiniti dell\'app per gli elementi dell\'interfaccia utente.</string>
+    <string name="pref_dynamic_colors_summary_enabled">Utilizzo dei colori d\'accento di sistema per gli elementi dell\'interfaccia.</string>
+    <string name="pref_dynamic_colors_summary_disabled">Utilizzo dei colori predefiniti dell\'app per gli elementi dell\'interfaccia.</string>
     <string name="pref_dynamic_colors_title">Colori dinamici</string>
-    <string name="pref_user_interface_transparency_effect_summary_enabled">I controlli di riproduzione diventano trasparenti mentre scorri.</string>
+    <string name="pref_user_interface_transparency_effect_summary_enabled">I controlli di riproduzione diventano trasparenti durante lo scorrimento.</string>
     <string name="pref_user_interface_transparency_effect_summary_disabled">I controlli di riproduzione rimangono opachi durante lo scorrimento.</string>
     <string name="pref_user_interface_transparency_effect_title">Effetto di trasparenza dell\'interfaccia utente</string>
     <string name="descr_expanded_player_streaming_link_icon">Nota Icona</string>
