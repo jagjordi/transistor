@@ -3,7 +3,7 @@
 buildscript {
     ext {
         kotlinVersion = '2.3.21'
-        gradlePluginVersion = '9.2.1'
+        gradlePluginVersion = '9.4.0'
     }
 
     repositories {
