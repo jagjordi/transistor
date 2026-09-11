@@ -16,8 +16,12 @@ android {
         targetSdk = 37
         versionCode = 115
         versionName = "4.3.8"
-        resourceConfigurations += listOf("en", "ar", "ast", "bg", "ca", "ckb", "cs", "cy", "de", "el", "eo", "es", "et", "eu", "fi", "fr", "fy", "ga", "gl", "hi", "hr", "hu", "ia", "id", "it", "iw", "ja", "ko", "nb-rNO", "nl", "pl", "pt", "pt-rBR", "ro", "ru", "sk", "sl", "sr", "ta", "tr", "uk", "zh-rCN")
-        // languages listed here, should also be listed in /app/src/main/res/xml/locales_config.xml
+    }
+
+    androidResources {
+        // Languages listed here must also be listed in
+        // /app/src/main/res/xml/locales_config.xml — the two lists are synced by hand.
+        localeFilters += listOf("en", "ar", "ast", "bg", "ca", "ckb", "cs", "cy", "de", "el", "eo", "es", "et", "eu", "fi", "fr", "fy", "ga", "gl", "hi", "hr", "hu", "ia", "id", "it", "iw", "ja", "ko", "nb-rNO", "nl", "pl", "pt", "pt-rBR", "ro", "ru", "sk", "sl", "sr", "ta", "tr", "uk", "zh-rCN")
     }
 
     compileOptions {
