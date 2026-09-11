@@ -30,7 +30,9 @@ Minimalist Android internet radio player; imports M3U/PLS streams, searches radi
 | Path | Role |
 |------|------|
 | `app/src/main/AndroidManifest.xml` | Permissions, intent filters (M3U/PLS/HLS schemes + MIME types), service/receiver/provider declarations, Android Auto metadata. |
-| `app/build.gradle` | App module Gradle config, dependencies, SDK levels, ProGuard wiring. |
+| `app/build.gradle.kts` | App module Gradle config, dependencies, SDK levels, R8 wiring. |
+| `gradle/libs.versions.toml` | Version catalog — all dependency and plugin versions. |
+| `settings.gradle.kts` | Repository declarations (plugins + dependencies) and module includes. |
 | `app/src/main/java/org/y20k/transistor/Transistor.kt` | `Application` subclass; theme init. |
 | `app/src/main/java/org/y20k/transistor/Keys.kt` | App-wide constants (intents, prefs keys, defaults). |
 | `app/src/main/java/org/y20k/transistor/MainActivity.kt` | Single-activity host (extends `BaseMainActivity`). |
@@ -69,9 +71,9 @@ Minimalist Android internet radio player; imports M3U/PLS streams, searches radi
 
 ## Build
 - Wrapper present. Debug APK: `./gradlew assembleDebug`. Release APK: `./gradlew assembleRelease`.
-- **Toolchain:** Java/Kotlin target pinned in build.gradle; JDK and Android build-tools unpinned — use Android Studio's bundled versions.
+- **Toolchain:** Gradle 9.6.1, AGP 9.4.0, Kotlin 2.3.21, Java/Kotlin target 17; versions live in `gradle/libs.versions.toml`. Daemon JVM pinned to JetBrains Runtime 21 by `gradle/gradle-daemon-jvm.properties`. Android build-tools unpinned — use Android Studio's bundled version.
 - `local.properties` must define `sdk.dir`. No other entries required by the build script.
-- Release: `minifyEnabled true`, `shrinkResources true`, R8 with `proguard-rules.pro`.
-- No product flavors. No `signingConfigs` in `app/build.gradle` — release signing done manually via Android Studio.
+- Release: `optimization { enable = true }` on the release build type; keep rules in `app/src/main/keepRules/rules.keep`.
+- No product flavors. No `signingConfigs` in `app/build.gradle.kts` — release signing done manually via Android Studio.
 - Lint: `MissingTranslation` disabled.
-- `dependenciesInfo.includeInApk = false` and `includeInBundle = false` (F-Droid reproducibility).
+- `dependenciesInfo.includeInApk = false` and `includeInBundle = false`.
