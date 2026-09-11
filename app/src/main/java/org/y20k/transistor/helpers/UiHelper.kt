@@ -235,7 +235,8 @@ object UiHelper {
         private val intrinsicWidth: Int = deleteIcon?.intrinsicWidth ?: 0
         private val intrinsicHeight: Int = deleteIcon?.intrinsicHeight ?: 0
         private val background: ColorDrawable = ColorDrawable()
-        private val backgroundColor = MaterialColors.getColor(context, R.attr.colorErrorContainer, null)
+        // colorErrorContainer is a Material attribute - the starred callback below deliberately uses appcompat
+        private val backgroundColor = MaterialColors.getColor(context, com.google.android.material.R.attr.colorErrorContainer, null)
         private val clearPaint: Paint = Paint().apply { xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR) }
 
         override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {
@@ -305,7 +306,8 @@ object UiHelper {
         private val intrinsicWidth: Int = starIcon?.intrinsicWidth ?: 0
         private val intrinsicHeight: Int = starIcon?.intrinsicHeight ?: 0
         private val background: ColorDrawable = ColorDrawable()
-        private val backgroundColor = MaterialColors.getColor(context, R.attr.colorPrimary, null)
+        // do not switch to Material to match the delete callback above: colorPrimary is an appcompat attribute, Material only consumes it
+        private val backgroundColor = MaterialColors.getColor(context, androidx.appcompat.R.attr.colorPrimary, null)
         private val clearPaint: Paint = Paint().apply { xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR) }
 
         override fun getMovementFlags(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder): Int {

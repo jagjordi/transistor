@@ -97,7 +97,7 @@ object AppThemeHelper {
             }
             .setThemeOverlay(
                 if (dynamicColorsEnabled) {
-                    R.style.ThemeOverlay_Material3_DynamicColors_DayNight
+                    com.google.android.material.R.style.ThemeOverlay_Material3_DynamicColors_DayNight
                 }
                 else {
                     R.style.AppTheme
