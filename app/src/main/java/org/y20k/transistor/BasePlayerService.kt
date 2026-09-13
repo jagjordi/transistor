@@ -354,23 +354,15 @@ abstract class BasePlayerService: MediaLibraryService() {
         override fun onConnectAsync(session: MediaSession, controller: MediaSession.ControllerInfo): ListenableFuture<MediaSession.ConnectionResult> {
             // add custom commands
             val mediaNotificationSessionCommands = MediaSession.ConnectionResult.DEFAULT_SESSION_AND_LIBRARY_COMMANDS.buildUpon().also { builder ->
-                builder.add(SessionCommand(Keys.CMD_CANCEL_NOTIFICATION, Bundle.EMPTY))
                 builder.add(SessionCommand(Keys.CMD_START_SLEEP_TIMER, Bundle.EMPTY))
                 builder.add(SessionCommand(Keys.CMD_CANCEL_SLEEP_TIMER, Bundle.EMPTY))
                 builder.add(SessionCommand(Keys.CMD_REQUEST_SLEEP_TIMER_RUNNING, Bundle.EMPTY))
                 builder.add(SessionCommand(Keys.CMD_REQUEST_SLEEP_TIMER_REMAINING, Bundle.EMPTY))
                 builder.add(SessionCommand(Keys.CMD_REQUEST_METADATA_HISTORY, Bundle.EMPTY))
             }.build()
-            // create cancel button
-            val customLayoutCancelButton: CommandButton = CommandButton.Builder().apply {
-                setIconResId(R.drawable.ic_player_extended_clear_24dp)
-                setDisplayName(getString(R.string.notification_cancel))
-                setSessionCommand(SessionCommand(Keys.CMD_CANCEL_NOTIFICATION, Bundle.EMPTY))
-            }.build()
-            // add commands and cancel button to notification
+            // add commands
             return Futures.immediateFuture(MediaSession.ConnectionResult.AcceptedResultBuilder(session, controller).apply {
                 setAvailableSessionCommands(mediaNotificationSessionCommands)
-                setCustomLayout(ImmutableList.of(customLayoutCancelButton))
             }.build())
         }
 
@@ -418,10 +410,6 @@ abstract class BasePlayerService: MediaLibraryService() {
                     val resultBundle = Bundle()
                     resultBundle.putStringArrayList(Keys.EXTRA_METADATA_HISTORY, ArrayList(metadataHistory))
                     return Futures.immediateFuture(SessionResult(SessionResult.RESULT_SUCCESS, resultBundle))
-                }
-                Keys.CMD_CANCEL_NOTIFICATION -> {
-                    player.stop()
-                    return Futures.immediateFuture(SessionResult(SessionResult.RESULT_SUCCESS))
                 }
             }
             return super.onCustomCommand(session, controller, customCommand, args)
