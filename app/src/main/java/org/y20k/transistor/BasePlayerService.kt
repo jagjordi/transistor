@@ -351,7 +351,7 @@ abstract class BasePlayerService: MediaLibraryService() {
             return Futures.immediateFuture(LibraryResult.ofItem(item, /* params= */ null))
         }
 
-        override fun onConnect(session: MediaSession, controller: MediaSession.ControllerInfo): MediaSession.ConnectionResult {
+        override fun onConnectAsync(session: MediaSession, controller: MediaSession.ControllerInfo): ListenableFuture<MediaSession.ConnectionResult> {
             // add custom commands
             val mediaNotificationSessionCommands = MediaSession.ConnectionResult.DEFAULT_SESSION_AND_LIBRARY_COMMANDS.buildUpon().also { builder ->
                 builder.add(SessionCommand(Keys.CMD_CANCEL_NOTIFICATION, Bundle.EMPTY))
@@ -368,10 +368,10 @@ abstract class BasePlayerService: MediaLibraryService() {
                 setSessionCommand(SessionCommand(Keys.CMD_CANCEL_NOTIFICATION, Bundle.EMPTY))
             }.build()
             // add commands and cancel button to notification
-            return MediaSession.ConnectionResult.AcceptedResultBuilder(session).apply {
+            return Futures.immediateFuture(MediaSession.ConnectionResult.AcceptedResultBuilder(session, controller).apply {
                 setAvailableSessionCommands(mediaNotificationSessionCommands)
                 setCustomLayout(ImmutableList.of(customLayoutCancelButton))
-            }.build()
+            }.build())
         }
 
         override fun onSubscribe(session: MediaLibrarySession, browser: MediaSession.ControllerInfo, parentId: String, params: LibraryParams?): ListenableFuture<LibraryResult<Void>> {
