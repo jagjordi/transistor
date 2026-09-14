@@ -187,6 +187,7 @@ object DownloadHelper {
                         .setTitle(fileName)
                         .setDestinationInExternalFilesDir(context, Keys.FOLDER_TEMP, fileName)
                         .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE)
+                        .addRequestHeader("User-Agent", Keys.USER_AGENT)
                 newIds[i] = downloadManager.enqueue(request)
                 activeDownloads.add(newIds[i])
             }
