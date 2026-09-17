@@ -111,4 +111,8 @@
     <string name="pref_dynamic_colors_title">Динамічні кольори</string>
     <string name="pref_dynamic_colors_summary_disabled">Використовувати типові кольори застосунку для елементів інтерфейсу.</string>
     <string name="pref_dynamic_colors_summary_enabled">Використовувати основні системні кольори для елементів інтерфейсу.</string>
+    <string name="pref_user_interface_transparency_effect_summary_enabled">Елементи керування відтворенням стають прозорими під час прокручування.</string>
+    <string name="pref_user_interface_transparency_effect_summary_disabled">Елементи керування відтворенням лишаються непрозорими під час прокручування.</string>
+    <string name="pref_user_interface_transparency_effect_title">Ефект прозорості інтерфейсу користувача</string>
+    <string name="descr_expanded_player_streaming_link_icon">Піктограма приміток</string>
 </resources>
