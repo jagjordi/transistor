@@ -37,7 +37,8 @@
 #   security find-generic-password -w -s y20k-android-keystore -a keystore-path
 #
 # The signed APK lands in app/build/outputs/apk/release/, named ready for upload
-# to the Codeberg release page; the unsigned intermediate is deleted. Builds
+# to the Codeberg release page, together with R8's mapping file named to
+# match; the unsigned intermediate is deleted. Builds
 # clean by default — pass --no-clean to reuse existing output. Refuses to build
 # unless the working tree matches HEAD, so the APK always corresponds to a commit
 # you can tag — pass --allow-dirty for a test build.
@@ -134,6 +135,15 @@ echo "==> Transistor $VERSION_NAME at $TREE_STATE, build-tools $(basename "$BUIL
 if [ "$CLEAN" = true ]; then ./gradlew clean; fi
 ./gradlew assembleRelease
 
+# R8's mapping file is what makes a production stack trace from a published APK
+# readable, so it is archived beside the APK under the matching name. R8 runs
+# once per variant, so one mapping covers every APK this build produced — the
+# name carries no ABI segment even where the build splits by ABI. Missing means
+# R8 did not run, which is worth stopping for: the APK would ship unmapped.
+MAPPING="app/build/outputs/mapping/release/mapping.txt"
+[ -f "$MAPPING" ] || { echo "no mapping file at $MAPPING — is R8 still enabled?" >&2; exit 1; }
+cp "$MAPPING" "$OUT_DIR/$APK_PREFIX-app-$NAME_KIND-mapping-$VERSION_NAME$NAME_SUFFIX.txt"
+
 STORE_PASS="$(keychain store)"
 KEY_PASS="$(keychain key)"
 
@@ -176,4 +186,5 @@ SIGNED="$OUT_DIR/$APK_PREFIX-app-$NAME_KIND-$VERSION_NAME$NAME_SUFFIX.apk"
 mv "$WORK/signed.apk" "$SIGNED"
 rm -f "$UNSIGNED"
 echo "    $SIGNED"
+echo "    $OUT_DIR/$APK_PREFIX-app-$NAME_KIND-mapping-$VERSION_NAME$NAME_SUFFIX.txt"
 echo "==> done, certificate matches $EXPECTED_SHA256"
