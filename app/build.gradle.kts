@@ -14,8 +14,8 @@ android {
         applicationId = "org.y20k.transistor"
         minSdk = 25
         targetSdk = 37
-        versionCode = 115
-        versionName = "4.3.8"
+        versionCode = 116
+        versionName = "4.3.9"
     }
 
     androidResources {
