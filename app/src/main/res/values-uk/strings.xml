@@ -7,7 +7,7 @@
     <string name="shortcut_last_station_disabled_message">Ярлик для відтворення останньої станції відключений.</string>
     <string name="descr_app_icon">Піктограма застосунку з зображенням старого радіо</string>
     <string name="player_sheet_h2_station_metadata">Зараз відтворюється</string>
-    <string name="player_sheet_h2_stream_url">URL потоку</string>
+    <string name="player_sheet_h2_stream_url">Посилання на стрім</string>
     <string name="dialog_generic_button_cancel">Скасувати</string>
     <string name="dialog_generic_button_okay">Гаразд</string>
     <string name="dialog_error_message_default">Сталась помилка</string>
