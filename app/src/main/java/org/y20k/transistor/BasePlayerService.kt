@@ -360,9 +360,23 @@ abstract class BasePlayerService: MediaLibraryService() {
                 builder.add(SessionCommand(Keys.CMD_REQUEST_SLEEP_TIMER_REMAINING, Bundle.EMPTY))
                 builder.add(SessionCommand(Keys.CMD_REQUEST_METADATA_HISTORY, Bundle.EMPTY))
             }.build()
+            // let untrusted controllers (third-party widgets, launchers) play, pause and switch stations
+            val playerCommands: Player.Commands = if (controller.isTrusted) {
+                MediaSession.ConnectionResult.DEFAULT_PLAYER_COMMANDS
+            } else {
+                MediaSession.ConnectionResult.DEFAULT_UNTRUSTED_PLAYER_COMMANDS.buildUpon().addAll(
+                    Player.COMMAND_PLAY_PAUSE,
+                    Player.COMMAND_SEEK_TO_PREVIOUS,
+                    Player.COMMAND_SEEK_TO_NEXT,
+                    Player.COMMAND_SEEK_TO_PREVIOUS_MEDIA_ITEM,
+                    Player.COMMAND_SEEK_TO_NEXT_MEDIA_ITEM,
+                    Player.COMMAND_SET_MEDIA_ITEM
+                ).build()
+            }
             // add commands
             return Futures.immediateFuture(MediaSession.ConnectionResult.AcceptedResultBuilder(session, controller).apply {
                 setAvailableSessionCommands(mediaNotificationSessionCommands)
+                setAvailablePlayerCommands(playerCommands)
             }.build())
         }
 
