@@ -1,6 +1,6 @@
-# v3.2.0 - Life on Mars?
+# v3.2.0 – Life on Mars?
 
-**2019-06-26**
+**26.06.2019**
 
 - italienische Übersetzung
 - Liste der Radiosender hat größere Icons

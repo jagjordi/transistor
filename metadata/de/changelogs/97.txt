@@ -1,8 +1,8 @@
-# v4.1.7 - Modern Love
+# v4.1.7 – Modern Love
 
-**2023-10-22**
-- Überarbeitung des Dialogs " Neuen Sender hinzufügen" für die Verarbeitung von m3u- und pls-Dateien (lokal und remote)
-- Aktualisierung des Icon-Sets (Material Symbole)
+**22.10.2023**
+- Überarbeitung des Dialogs „Neuen Sender hinzufügen“ für die Verarbeitung von m3u- und pls-Dateien (lokal und remote)
+- Aktualisierung des Symbolsets (Material-Symbole)
 - Aktualisierung des App-Symbols
 - neue Übersetzungen: Bulgarisch, Finnisch, Koreanisch
 - aktualisierte Übersetzungen

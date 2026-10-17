@@ -1,6 +1,6 @@
-# v4.0.2 - Andy Warhol
+# v4.0.2 – Andy Warhol
 
-**2020-07-08**
+**08.07.2020**
 
 - behebt einen Fehler beim Importieren von Stream-URLs (möglicherweise muss der Sender aktualisiert werden)
 - bringt die Metadatenanzeige für Android Auto zurück

@@ -1,6 +1,6 @@
-# v4.3.0 - The Width of a Circle
+# v4.3.0 – The Width of a Circle
 
-**2025-10-08**
+**08.10.2025**
 - Neuer schwebender Player
 - Neue Einstellung zur Aktivierung dynamischer Farben (Android 12+)
 - Verbessertes Laden von Bildern in der Senderliste

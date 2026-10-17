@@ -1,5 +1,5 @@
-# v4.0.16 - Andy Warhol
+# v4.0.16 – Andy Warhol
 
-**2021-08-12**
+**12.08.2021**
 
 - Korrigiert die Schaltflächen Zurück und Weiter in der Wiedergabebenachrichtigung

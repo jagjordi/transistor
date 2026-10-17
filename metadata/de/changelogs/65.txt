@@ -1,6 +1,6 @@
-# v3.1.1 - John, I’m Only Dancing
+# v3.1.1 – John, I’m Only Dancing
 
-**2019-01-16**
+**16.01.2019**
 
 - unterstützt den Audio-Equalizer des Android-Systems
 - Fehlerbehebungen

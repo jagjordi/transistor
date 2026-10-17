@@ -1,5 +1,5 @@
-# v4.3.3 - The Width of a Circle
+# v4.3.3 – The Width of a Circle
 
-**2025-10-25**
+**25.10.2025**
 - Fehler beim manuellen Festlegen von Senderbildern behoben
 - Übersetzungsfehler beim Titel des Einstellungsbildschirms behoben

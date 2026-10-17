@@ -1,6 +1,6 @@
-# v4.0.8 - Andy Warhol
+# v4.0.8 – Andy Warhol
 
-**2020-11-25**
+**25.11.2020**
 
 - Hebräische Sprachversion
 - Übersetzungen aktualisiert

@@ -1,6 +1,6 @@
-# v4.0.15 - Andy Warhol
+# v4.0.15 – Andy Warhol
 
-**2021-07-28**
+**28.07.2021**
 
 - neue Sprache: Friesisch
 - aktualisierte Übersetzungen

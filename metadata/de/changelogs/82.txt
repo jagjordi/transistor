@@ -1,6 +1,6 @@
-# v4.0.11 - Andy Warhol
+# v4.0.11 – Andy Warhol
 
-**2021-02-25**
+**25.02.2021**
 
 - Esperanto-Sprachversion
 - aktualisierte Übersetzungen

@@ -1,6 +1,6 @@
-# v4.3.6 - The Width of a Circle
+# v4.3.6 – The Width of a Circle
 
-**2026-02-14**
+**14.02.2026**
 
 - Übersetzungen aktualisiert
 - Softwarebibliotheken aktualisiert

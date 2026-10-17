@@ -1,6 +1,6 @@
-# v4.0.17 - Andy Warhol
+# v4.0.17 – Andy Warhol
 
-**2021-11-05**
+**05.11.2021**
 
 - App-Design verwendet jetzt "dynamische Farben" (Material You) auf Android 12
 - kleine Fehlerbehebungen

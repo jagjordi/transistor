@@ -1,6 +1,6 @@
-# v4.0.1 - Andy Warhol
+# v4.0.1 – Andy Warhol
 
-**2020-07-05**
+**05.07.2020**
 
 - behebt mehrere kleine Fehler in v4.0.0
 -- Metadaten in Benachrichtigungen werden korrekt aktualisiert
