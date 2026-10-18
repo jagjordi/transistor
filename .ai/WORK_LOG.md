@@ -2,7 +2,7 @@
 
 ## Current state
 
-Active task: **Gradle standardisation**, a cross-repo task whose plan lives in `workbench/PLAN_GRADLE_STANDARDISATION.md`, not here. **Phase P4c is complete as of 2026-09-11** — all seven iterations done. **Next for this repo is P5**, the `non-free` branch merge, which is a `JOB_QUICK_FIX.md` job, not an iteration job: merge master into `non-free` and port the Google Cast block into the converted `.kts`. The branch differed from master by five lines in `app/build.gradle` when last verified (2026-09-09), so this is a port, not a re-conversion — do it while the conversion is still fresh. **Transistor is release-frozen from `097b40ba`**; its F-Droid recipe seds `build.gradle` and `../settings.gradle`, both now `.kts`, so the seds fail rather than no-op and no release tag can go out until the recipe MR rides with it (P6). The freeze is cheap — v4.3.8 / code 115 shipped 2026-08-05 with nothing queued behind it. Post-phase reference numbers: `app-release-unsigned.apk` **3,333,742 B**, `mapping.txt` **37,182,512 B / 336,805 lines**, `app-debug.apk` **12,450,633 B**; **44 actionable release tasks incremental / 45 clean, 36 debug / 37 clean**; `releaseRuntimeClasspath` **706 lines, sha256 `00ee2a8cc5ab727235510ecf639cd70eee998d8b918d78b9c4b4512a0c4e626a`**. Re-derive rather than trust.
+No active task. **Gradle standardisation is complete for this repo** (plan: `workbench/PLAN_GRADLE_STANDARDISATION.md`): P4c done 2026-09-11, P5 `non-free` merge done 2026-09-13 (`a2cc70c0`), P6 fdroiddata recipe MR !49334 merged 2026-09-18 — **the release freeze from `097b40ba` is over.** Released since: v4.3.9 (code 116, 2026-09-17) and v4.3.10 (code 117, 2026-10-13), both on F-Droid. The `non-free` branch (Google Cast, hence Play Services) is kept merged with master, last on 2026-10-13. P4c reference numbers (2026-09-11, pre-release): `app-release-unsigned.apk` **3,333,742 B**, `mapping.txt` **37,182,512 B / 336,805 lines**, `app-debug.apk` **12,450,633 B**; **44 actionable release tasks incremental / 45 clean, 36 debug / 37 clean**; `releaseRuntimeClasspath` **706 lines, sha256 `00ee2a8cc5ab727235510ecf639cd70eee998d8b918d78b9c4b4512a0c4e626a`**. Re-derive rather than trust.
 
 **Transistor keeps the standalone Kotlin plugin** — a documented exception to the shared target spec, not an oversight. `@Parcelize` is inert under AGP's built-in Kotlin; settled on Trackbook and inherited here, see Decisions below.
 
@@ -10,8 +10,6 @@ This is the first work log in this repo. There is no `.ai/WORK_PLAN.md` and ther
 
 ## Open issues
 
-- **P6 will have to rewrite Transistor's fdroiddata `prebuild`, not delete it.** The recipe runs two seds — `/media3-cast/d` on `build.gradle` and `/foojay/d` on `../settings.gradle`. The first is **already a no-op on master** (the Cast dependency lives on the `non-free` branch), but both name files that **stopped existing at P4c.4 (2026-09-11)**, and a sed against a missing file fails the build. Same shape as Trackbook's problem, different cause.
-- **P5 follows this phase directly.** The `non-free` branch differs from master by **five lines in `app/build.gradle`** (verified 2026-09-09) — the Cast dependency and its plugin lines. After P4c.4 that merge is a small port into the converted `.kts`, not a re-conversion. Do it while the conversion is still fresh.
 - **The `builtInKotlin=false` / `newDsl=false` exception expires at AGP 10.** The deprecation the Kotlin DSL surfaces states that `BaseAppModuleExtension` "will be removed in AGP 10.0", so the flag selects a class AGP has scheduled for deletion. At AGP 10 the choice returns: built-in Kotlin, which `@Parcelize` blocks, or hand-written `Parcelable`. Found on Trackbook 2026-09-07; it applies identically here, and the cross-repo plan's phrase "a stable end state" holds under AGP 9.4 only.
 - **No security audit yet.** Audits now start from a threat model: workbench `JOB_THREAT_MODEL` → `docs/THREAT_MODEL.md` → `JOB_RUN_AUDIT` (the seeded `SECURITY_AUDIT_STARTPROMPT.md` was removed 2026-10-18). Escapepod's audit findings on XML and download vectors are the ones meant to transfer.
 
@@ -23,6 +21,10 @@ This is the first work log in this repo. There is no `.ai/WORK_PLAN.md` and ther
 - 2026-09-09 — **Number P4c's iterations 1–7 with no gap.** Why: the extra iteration that made P4b eight was the Kotlin-plugin cluster, which "Resolved by probe" settled before this phase was planned, so there is nothing to cancel in place. P4b.3's cancelled ID stays cancelled *in P4b* — that convention exists to keep cross-references resolving in a file that already published them, and it does not apply to a phase being planned fresh.
 
 ## History
+
+### 2026-10-18 — State synced after P5/P6
+- Outcome: done
+- Summary: "Current state" still named P5 as next and the release freeze as active. Both were stale: P5 closed 2026-09-13, recipe MR !49334 merged 2026-09-18, v4.3.9 and v4.3.10 shipped. Removed the two resolved open issues (P6 `prebuild` rewrite, P5 merge). Also removed the obsolete `.ai/SECURITY_AUDIT_STARTPROMPT.md` (`4fb71cfd`); audits now start from `docs/THREAT_MODEL.md`.
 
 ### 2026-09-11 — Phase P4c complete
 - Outcome: done
