@@ -16,6 +16,7 @@ android {
         targetSdk = 37
         versionCode = 117
         versionName = "4.3.10"
+        manifestPlaceholders["appLabel"] = "@string/app_name"
     }
 
     androidResources {
@@ -40,6 +41,8 @@ android {
             }
         }
         debug {
+            applicationIdSuffix = ".debug"
+            manifestPlaceholders["appLabel"] = "@string/app_name_debug"
         }
     }
 
