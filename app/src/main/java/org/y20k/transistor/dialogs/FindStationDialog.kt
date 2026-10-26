@@ -14,11 +14,10 @@
 
 package org.y20k.transistor.dialogs
 
-import android.app.Activity
 import android.content.Context
 import android.os.Handler
 import android.view.LayoutInflater
-import android.view.inputmethod.InputMethodManager
+import android.view.WindowManager
 import android.widget.ProgressBar
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
@@ -32,6 +31,7 @@ import com.google.android.material.textview.MaterialTextView
 import org.y20k.transistor.Keys
 import org.y20k.transistor.R
 import org.y20k.transistor.core.Station
+import org.y20k.transistor.helpers.UiHelper
 import org.y20k.transistor.search.DirectInputCheck
 import org.y20k.transistor.search.RadioBrowserResult
 import org.y20k.transistor.search.RadioBrowserSearch
@@ -72,8 +72,7 @@ class FindStationDialog (private val context: Context, private val listener: Fin
     override fun onSearchResultTapped(result: Station) {
         station = result
         // hide keyboard
-        val imm: InputMethodManager = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(stationSearchBoxView.windowToken, 0)
+        UiHelper.hideSoftKeyboard(context, stationSearchBoxView)
         // make add button clickable
         activateAddButton()
     }
@@ -149,6 +148,7 @@ class FindStationDialog (private val context: Context, private val listener: Fin
                 return true
             }
             override fun onQueryTextSubmit(query: String): Boolean {
+                UiHelper.hideSoftKeyboard(context, stationSearchBoxView)
                 handleSearchBoxInput(context, query)
                 return true
             }
@@ -159,6 +159,9 @@ class FindStationDialog (private val context: Context, private val listener: Fin
 
         // create and display dialog
         dialog = builder.create()
+        // focus search box and open keyboard
+        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE or WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
+        stationSearchBoxView.requestFocus()
         dialog.show()
 
         // initially disable "Add" button
@@ -178,6 +181,12 @@ class FindStationDialog (private val context: Context, private val listener: Fin
         }
         stationSearchResultList.layoutManager = layoutManager
         stationSearchResultList.itemAnimator = DefaultItemAnimator()
+        // hide keyboard when user starts scrolling the list
+        stationSearchResultList.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                if (newState == RecyclerView.SCROLL_STATE_DRAGGING) UiHelper.hideSoftKeyboard(context, stationSearchBoxView)
+            }
+        })
     }
 
 
