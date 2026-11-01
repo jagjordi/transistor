@@ -423,6 +423,8 @@ data class MainActivityLayoutHolder (var rootView: View) : MainFragmentLayoutHol
                 topMargin = systemBars.top
             }
             playerCardView.updateLayoutParams<FrameLayout.LayoutParams> {
+                leftMargin = (Keys.PLAYER_SIDE_MARGIN * UiHelper.getDensityScalingFactor(rootView.context)).toInt() + systemBars.left
+                rightMargin = (Keys.PLAYER_SIDE_MARGIN * UiHelper.getDensityScalingFactor(rootView.context)).toInt() + systemBars.right
                 bottomMargin = (Keys.PLAYER_BOTTOM_MARGIN * UiHelper.getDensityScalingFactor(rootView.context)).toInt() + systemBars.bottom
             }
             // return the insets

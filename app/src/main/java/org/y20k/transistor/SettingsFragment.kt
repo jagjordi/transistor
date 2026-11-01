@@ -517,9 +517,13 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
             // apply measurements
             toolbar.updateLayoutParams<LinearLayout.LayoutParams> {
+                leftMargin = systemBars.left
                 topMargin = systemBars.top
+                rightMargin = systemBars.right
             }
             preferencesList.updatePadding(
+                left = systemBars.left,
+                right = systemBars.right,
                 bottom = systemBars.bottom + ((Keys.PLAYER_HEIGHT + Keys.PLAYER_BOTTOM_MARGIN) * UiHelper.getDensityScalingFactor(requireContext())).toInt()
             )
             // return the insets

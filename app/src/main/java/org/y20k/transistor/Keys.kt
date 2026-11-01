@@ -218,6 +218,7 @@ object Keys {
     const val SIZE_STATION_IMAGE: Int = 960
     const val PLAYER_HEIGHT: Int = 80 // height of card_player.xml
     const val PLAYER_BOTTOM_MARGIN: Int = 16 // value of android:layout_marginBottom for card_player in activity_main.xml
+    const val PLAYER_SIDE_MARGIN: Int = 8 // value of android:layout_marginStart/End for card_player in activity_main.xml
 
     // default values
     val DEFAULT_DATE: Date = Date(0L)

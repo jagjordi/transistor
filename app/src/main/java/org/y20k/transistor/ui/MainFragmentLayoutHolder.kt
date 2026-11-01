@@ -125,12 +125,16 @@ data class MainFragmentLayoutHolder(var rootView: View) {
             systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars() or WindowInsetsCompat.Type.displayCutout())
             // update the list padding to position first item below status bar and have enough room at the bottom to show the player
             recyclerView.updatePadding(
+                left = systemBars.left,
                 top = systemBars.top,
+                right = systemBars.right,
                 bottom = systemBars.bottom + ((Keys.PLAYER_HEIGHT + Keys.PLAYER_BOTTOM_MARGIN) * UiHelper.getDensityScalingFactor(rootView.context)).toInt()
             )
-            // update the onboarding layout margin to position it below the status bar
+            // update the onboarding layout margin to position it below the status bar and beside the navigation bar
             onboardingLayout.updateLayoutParams<CoordinatorLayout.LayoutParams> {
+                leftMargin = systemBars.left
                 topMargin = systemBars.top
+                rightMargin = systemBars.right
             }
             // return the insets
             insets
