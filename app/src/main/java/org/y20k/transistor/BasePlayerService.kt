@@ -14,6 +14,7 @@
 
 package org.y20k.transistor
 
+import android.Manifest
 import android.app.PendingIntent
 import android.app.TaskStackBuilder
 import android.content.BroadcastReceiver
@@ -21,7 +22,9 @@ import android.content.Context
 import android.content.Intent
 import android.content.IntentFilter
 import android.content.SharedPreferences
+import android.content.pm.PackageManager
 import android.media.audiofx.AudioEffect
+import android.os.Build
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
@@ -30,6 +33,7 @@ import android.text.Html
 import android.util.Log
 import android.widget.Toast
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContextCompat
 import androidx.localbroadcastmanager.content.LocalBroadcastManager
 import androidx.media3.common.AudioAttributes
 import androidx.media3.common.C
@@ -296,6 +300,21 @@ abstract class BasePlayerService: MediaLibraryService() {
     }
 
 
+    /* Shows a hint on the first failed connection when local network access is missing (Android 17+) */
+    private fun showLocalNetworkHintIfNeeded(loadErrorInfo: LoadErrorHandlingPolicy.LoadErrorInfo) {
+        val reason: Int? = (loadErrorInfo.exception as? HttpDataSource.HttpDataSourceException)?.reason
+        val isConnectionError: Boolean = reason == PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_TIMEOUT || reason == PlaybackException.ERROR_CODE_IO_NETWORK_CONNECTION_FAILED
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CINNAMON_BUN
+                && loadErrorInfo.errorCount == 1
+                && isConnectionError
+                && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_LOCAL_NETWORK) != PackageManager.PERMISSION_GRANTED) {
+            handler.post {
+                Toast.makeText(this, this.getString(R.string.toast_message_error_local_network), Toast.LENGTH_LONG).show()
+            }
+        }
+    }
+
+
     /* Reads collection of stations from storage using GSON */
     private fun loadCollection(context: Context) {
         Log.v(TAG, "Loading collection of stations from storage")
@@ -517,6 +536,8 @@ abstract class BasePlayerService: MediaLibraryService() {
      */
     private val loadErrorHandlingPolicy: DefaultLoadErrorHandlingPolicy = object: DefaultLoadErrorHandlingPolicy()  {
         override fun getRetryDelayMsFor(loadErrorInfo: LoadErrorHandlingPolicy.LoadErrorInfo): Long {
+            // stream may be on the local network, which needs a permission since Android 17
+            showLocalNetworkHintIfNeeded(loadErrorInfo)
             // try to reconnect every 5 seconds - up to 20 times
             if (loadErrorInfo.errorCount <= Keys.DEFAULT_MAX_RECONNECTION_COUNT && loadErrorInfo.exception is HttpDataSource.HttpDataSourceException) {
                 return Keys.RECONNECTION_WAIT_INTERVAL

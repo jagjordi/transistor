@@ -14,20 +14,25 @@
 
 package org.y20k.transistor
 
+import android.Manifest
 import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.provider.Settings
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts.RequestPermission
 import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
@@ -77,6 +82,7 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
     /* Main class variables */
     private var settingsListDragListener: SettingsListDragListener? = null
     private lateinit var toolbar: MaterialToolbar
+    private lateinit var preferenceAllowLocalStreams: Preference
 
 
     /* Overrides onViewCreated from PreferenceFragmentCompat */
@@ -97,6 +103,14 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
 
         // set up edge to edge display
         setupEdgeToEdge(view)
+    }
+
+
+    /* Overrides onResume from Fragment */
+    override fun onResume() {
+        super.onResume()
+        // permission may have changed in system settings
+        updateLocalStreamsSummary()
     }
 
 
@@ -224,6 +238,19 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         preferenceBufferSize.summaryOff = getString(R.string.pref_buffer_size_summary_disabled)
         preferenceBufferSize.setDefaultValue(PreferencesHelper.loadLargeBufferSize())
 
+        // set up "Allow Local Streams" preference
+        preferenceAllowLocalStreams = Preference(activity as Context)
+        preferenceAllowLocalStreams.title = getString(R.string.pref_local_streams_title)
+        preferenceAllowLocalStreams.setIcon(R.drawable.ic_lan_24dp)
+        preferenceAllowLocalStreams.setOnPreferenceClickListener {
+            if (isLocalNetworkPermissionGranted()) {
+                openAppInfo()
+            } else {
+                requestLocalNetworkPermissionLauncher.launch(Manifest.permission.ACCESS_LOCAL_NETWORK)
+            }
+            true
+        }
+
         // set up "Edit Stream Address" preference
         val preferenceEnableEditingStreamUri: SwitchPreferenceCompat = SwitchPreferenceCompat(activity as Context)
         preferenceEnableEditingStreamUri.title = getString(R.string.pref_edit_station_stream_title)
@@ -313,6 +340,9 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
         screen.addPreference(preferenceRestoreCollection)
         screen.addPreference(preferenceCategoryAdvanced)
         screen.addPreference(preferenceBufferSize)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.CINNAMON_BUN) {
+            screen.addPreference(preferenceAllowLocalStreams)
+        }
         screen.addPreference(preferenceEnableEditingGeneral)
         screen.addPreference(preferenceEnableEditingStreamUri)
 
@@ -363,6 +393,39 @@ class SettingsFragment: PreferenceFragmentCompat(), YesNoDialog.YesNoDialogListe
 
     /* Register the ActivityResultLauncher for the restore dialog */
     private val requestRestoreCollectionLauncher = registerForActivityResult(StartActivityForResult(), this::requestRestoreCollectionResult)
+
+
+    /* Register the permission launcher for local network access */
+    private val requestLocalNetworkPermissionLauncher = registerForActivityResult(RequestPermission()) { isGranted: Boolean ->
+        updateLocalStreamsSummary()
+        if (!isGranted && !shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_LOCAL_NETWORK)) {
+            // system will not ask again: let the user grant it in App info
+            openAppInfo()
+        }
+    }
+
+
+    /* Checks if the app may connect to devices on the local network */
+    private fun isLocalNetworkPermissionGranted(): Boolean {
+        return ContextCompat.checkSelfPermission(activity as Context, Manifest.permission.ACCESS_LOCAL_NETWORK) == PackageManager.PERMISSION_GRANTED
+    }
+
+
+    /* Shows the current local network permission state in the "Allow Local Streams" preference */
+    private fun updateLocalStreamsSummary() {
+        if (isLocalNetworkPermissionGranted()) {
+            preferenceAllowLocalStreams.summary = getString(R.string.pref_local_streams_summary_enabled)
+        } else {
+            preferenceAllowLocalStreams.summary = getString(R.string.pref_local_streams_summary_disabled)
+        }
+    }
+
+
+    /* Opens the system App info page of Transistor */
+    private fun openAppInfo() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS, Uri.fromParts("package", requireContext().packageName, null))
+        startActivity(intent)
+    }
 
 
     /* Pass the activity result for the save m3u dialog */
