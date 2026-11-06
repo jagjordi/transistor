@@ -26,8 +26,10 @@ import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.media3.common.MediaItem
 import androidx.media3.common.PlaybackException
 import androidx.media3.common.Player
+import androidx.media3.common.Timeline
 import androidx.media3.session.MediaController
 import androidx.media3.session.SessionResult
 import androidx.media3.session.SessionToken
@@ -55,6 +57,7 @@ import org.y20k.transistor.helpers.CollectionHelper
 import org.y20k.transistor.helpers.FileHelper
 import org.y20k.transistor.helpers.ImportHelper
 import org.y20k.transistor.helpers.PreferencesHelper
+import org.y20k.transistor.helpers.TimeshiftHelper
 import org.y20k.transistor.ui.MainActivityLayoutHolder
 import org.y20k.transistor.ui.PlayerState
 
@@ -142,6 +145,8 @@ abstract class BaseMainActivity : AppCompatActivity(), SharedPreferences.OnShare
         playerState = PreferencesHelper.loadPlayerState()
         // toggle periodic sleep timer update request
         togglePeriodicSleepTimerUpdateRequest()
+        // start periodic timeshift view updates
+        startPeriodicTimeshiftUpdate()
 //
 //        // Update player views with current station data after activity recreation
 //        if (playerState.stationPosition >= 0) {
@@ -159,6 +164,7 @@ abstract class BaseMainActivity : AppCompatActivity(), SharedPreferences.OnShare
         super.onPause()
         // stop receiving playback progress updates
         handler.removeCallbacks(periodicSleepTimerUpdateRequestRunnable)
+        handler.removeCallbacks(periodicTimeshiftUpdateRunnable)
     }
 
 
@@ -230,6 +236,8 @@ abstract class BaseMainActivity : AppCompatActivity(), SharedPreferences.OnShare
         setupPlaybackControls()
         // update play button state
         layout.togglePlayButton(controller.isPlaying)
+        // update timeshift views
+        startPeriodicTimeshiftUpdate()
     }
 
 
@@ -264,6 +272,42 @@ abstract class BaseMainActivity : AppCompatActivity(), SharedPreferences.OnShare
             controller?.cancelSleepTimer()
             togglePeriodicSleepTimerUpdateRequest()
         }
+
+        // set up timeshift controls (only visible for streams that can be rewound)
+        layout.timeshiftHourButtonView.setOnClickListener {
+            controller?.let { TimeshiftHelper.skipToStartOfHour(it) }
+            updateTimeshiftViews()
+        }
+        layout.timeshiftSkipBackButtonView.setOnClickListener {
+            controller?.let { TimeshiftHelper.skipBack(it) }
+            updateTimeshiftViews()
+        }
+        layout.timeshiftSkipForwardButtonView.setOnClickListener {
+            controller?.let { TimeshiftHelper.skipForward(it) }
+            updateTimeshiftViews()
+        }
+        layout.timeshiftGoLiveButtonView.setOnClickListener {
+            controller?.let { TimeshiftHelper.goLive(it) }
+            updateTimeshiftViews()
+        }
+        layout.timeshiftSeekListener = { positionMs ->
+            controller?.let { TimeshiftHelper.seekTo(it, positionMs) }
+            updateTimeshiftViews()
+        }
+    }
+
+
+    /* Updates the timeshift views with the current state of the player */
+    private fun updateTimeshiftViews() {
+        val state: TimeshiftHelper.TimeshiftState? = controller?.let { TimeshiftHelper.getState(it) }
+        layout.updateTimeshift(this, state)
+    }
+
+
+    /* (Re-)starts the periodic update of the timeshift views */
+    private fun startPeriodicTimeshiftUpdate() {
+        handler.removeCallbacks(periodicTimeshiftUpdateRunnable)
+        handler.post(periodicTimeshiftUpdateRunnable)
     }
 
 
@@ -372,9 +416,41 @@ abstract class BaseMainActivity : AppCompatActivity(), SharedPreferences.OnShare
 
 
     /*
+     * Runnable: Periodically updates the timeshift views
+     */
+    private val periodicTimeshiftUpdateRunnable: Runnable = object : Runnable {
+        override fun run() {
+            // update timeshift views
+            updateTimeshiftViews()
+            // use the handler to start runnable again after specified delay
+            handler.postDelayed(this, Keys.TIMESHIFT_UPDATE_INTERVAL)
+        }
+    }
+    /*
+     * End of declaration
+     */
+
+
+    /*
      * Player.Listener: Called when one or more player states changed.
      */
     private var playerListener: Player.Listener = object : Player.Listener {
+
+        override fun onTimelineChanged(timeline: Timeline, reason: Int) {
+            super.onTimelineChanged(timeline, reason)
+            // live window may have appeared or changed
+            updateTimeshiftViews()
+        }
+
+        override fun onMediaItemTransition(mediaItem: MediaItem?, reason: Int) {
+            super.onMediaItemTransition(mediaItem, reason)
+            updateTimeshiftViews()
+        }
+
+        override fun onPositionDiscontinuity(oldPosition: Player.PositionInfo, newPosition: Player.PositionInfo, reason: Int) {
+            super.onPositionDiscontinuity(oldPosition, newPosition, reason)
+            updateTimeshiftViews()
+        }
 
         override fun onIsPlayingChanged(isPlaying: Boolean) {
             super.onIsPlayingChanged(isPlaying)

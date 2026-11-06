@@ -34,18 +34,22 @@ import androidx.core.net.toUri
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.isGone
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.signature.ObjectKey
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.slider.Slider
 import org.y20k.transistor.Keys
 import org.y20k.transistor.R
 import org.y20k.transistor.SettingsFragment
 import org.y20k.transistor.core.Station
 import org.y20k.transistor.helpers.DateTimeHelper
 import org.y20k.transistor.helpers.PreferencesHelper
+import org.y20k.transistor.helpers.TimeshiftHelper
 import org.y20k.transistor.helpers.UiHelper
 import java.io.File
 
@@ -80,6 +84,17 @@ data class MainActivityLayoutHolder (var rootView: View) : MainFragmentLayoutHol
     var playerSleepTimerStartButtonView: ImageButton
     var playerSleepTimerCancelButtonView: ImageButton
     var sheetSleepTimerRemainingTimeView: TextView
+    private var timeshiftViews: Group
+    var timeshiftHourButtonView: ImageButton
+    var timeshiftSkipBackButtonView: ImageButton
+    var timeshiftSkipForwardButtonView: ImageButton
+    var timeshiftSliderView: Slider
+    private var timeshiftPositionView: TextView
+    var timeshiftGoLiveButtonView: MaterialButton
+    var timeshiftSeekListener: ((positionMs: Long) -> Unit)? = null
+    private var timeshiftAvailable: Boolean = false
+    private var timeshiftAtLiveEdge: Boolean = true
+    private var timeshiftUserIsSeeking: Boolean = false
     private var metadataHistory: MutableList<String>
     private var metadataHistoryPosition: Int
     private var isBuffering: Boolean
@@ -109,6 +124,13 @@ data class MainActivityLayoutHolder (var rootView: View) : MainFragmentLayoutHol
         playerSleepTimerStartButtonView = rootView.findViewById(R.id.sleep_timer_start_button)
         playerSleepTimerCancelButtonView = rootView.findViewById(R.id.sleep_timer_cancel_button)
         sheetSleepTimerRemainingTimeView = rootView.findViewById(R.id.sleep_timer_remaining_time)
+        timeshiftViews = rootView.findViewById(R.id.timeshift_views)
+        timeshiftHourButtonView = rootView.findViewById(R.id.timeshift_hour_button)
+        timeshiftSkipBackButtonView = rootView.findViewById(R.id.timeshift_skip_back_button)
+        timeshiftSkipForwardButtonView = rootView.findViewById(R.id.timeshift_skip_forward_button)
+        timeshiftSliderView = rootView.findViewById(R.id.timeshift_slider)
+        timeshiftPositionView = rootView.findViewById(R.id.timeshift_position)
+        timeshiftGoLiveButtonView = rootView.findViewById(R.id.timeshift_go_live_button)
 
         // set up variables
         metadataHistory = PreferencesHelper.loadMetadataHistory()
@@ -145,6 +167,9 @@ data class MainActivityLayoutHolder (var rootView: View) : MainFragmentLayoutHol
             copyMetadataHistoryToClipboard()
             return@setOnLongClickListener true
         }
+
+        // set up timeshift slider
+        setupTimeshiftSlider()
 
         // set up edge to edge display
         setupEdgeToEdge()
@@ -255,6 +280,72 @@ data class MainActivityLayoutHolder (var rootView: View) : MainFragmentLayoutHol
     }
 
 
+    /* Updates the timeshift views - hides them if the current stream can not be rewound */
+    fun updateTimeshift(context: Context, state: TimeshiftHelper.TimeshiftState?) {
+        timeshiftAvailable = state != null
+        if (state != null) {
+            timeshiftAtLiveEdge = state.isAtLiveEdge
+            if (!timeshiftUserIsSeeking) {
+                // update slider - valueTo must be set before value, both must stay in range
+                val valueTo: Float = state.livePositionMs.coerceAtLeast(1L).toFloat()
+                timeshiftSliderView.valueTo = valueTo
+                timeshiftSliderView.value = state.positionMs.toFloat().coerceIn(0f, valueTo)
+                // update position text
+                timeshiftPositionView.text = getTimeshiftPositionText(context, state.behindLiveMs)
+            }
+            timeshiftSkipForwardButtonView.isEnabled = !state.isAtLiveEdge
+            timeshiftSkipForwardButtonView.alpha = if (state.isAtLiveEdge) 0.38f else 1f
+        }
+        toggleTimeshiftViews()
+    }
+
+
+    /* Returns the text that describes how far playback is behind the live edge */
+    private fun getTimeshiftPositionText(context: Context, behindLiveMs: Long): String {
+        return if (behindLiveMs < Keys.TIMESHIFT_LIVE_EDGE_TOLERANCE) {
+            context.getString(R.string.player_sheet_timeshift_live)
+        } else {
+            context.getString(R.string.player_sheet_timeshift_behind_live, DateTimeHelper.convertToHoursMinutesAndSeconds(behindLiveMs))
+        }
+    }
+
+
+    /* Shows the timeshift views if the current stream can be rewound and the extended player views are visible */
+    private fun toggleTimeshiftViews() {
+        val show: Boolean = timeshiftAvailable && playerExtendedViews.isVisible
+        timeshiftViews.isVisible = show
+        // go live button keeps its space (invisible) at the live edge, so that the controls do not jump around
+        if (show) {
+            timeshiftGoLiveButtonView.isInvisible = timeshiftAtLiveEdge
+        } else {
+            timeshiftGoLiveButtonView.isGone = true
+        }
+    }
+
+
+    /* Sets up the timeshift slider - seeks when the user lets go of the slider */
+    private fun setupTimeshiftSlider() {
+        timeshiftSliderView.setLabelFormatter { value ->
+            // label shows how far behind live the selected position is
+            DateTimeHelper.convertToHoursMinutesAndSeconds((timeshiftSliderView.valueTo - value).toLong(), negativeValue = true)
+        }
+        timeshiftSliderView.addOnChangeListener { slider, value, fromUser ->
+            if (fromUser) {
+                timeshiftPositionView.text = getTimeshiftPositionText(rootView.context, (slider.valueTo - value).toLong())
+            }
+        }
+        timeshiftSliderView.addOnSliderTouchListener(object : Slider.OnSliderTouchListener {
+            override fun onStartTrackingTouch(slider: Slider) {
+                timeshiftUserIsSeeking = true
+            }
+            override fun onStopTrackingTouch(slider: Slider) {
+                timeshiftUserIsSeeking = false
+                timeshiftSeekListener?.invoke(slider.value.toLong())
+            }
+        })
+    }
+
+
     /* Toggles play/pause button */
     fun togglePlayButton(isPlaying: Boolean) {
         if (isPlaying) {
@@ -316,7 +407,8 @@ data class MainActivityLayoutHolder (var rootView: View) : MainFragmentLayoutHol
     /* Shows player */
     fun showPlayer(): Boolean {
         playerPlaybackViews.visibility = View.VISIBLE
-        playerExtendedViews.visibility = View.GONE
+        // extended views stay as they are - playback state changes (e.g. re-buffering after a timeshift seek) must not collapse them
+        toggleTimeshiftViews()
         return true
     }
 
@@ -325,6 +417,7 @@ data class MainActivityLayoutHolder (var rootView: View) : MainFragmentLayoutHol
     fun hidePlayer(): Boolean {
         playerPlaybackViews.visibility = View.GONE
         playerExtendedViews.visibility = View.GONE
+        toggleTimeshiftViews()
         return true
     }
 
@@ -346,6 +439,7 @@ data class MainActivityLayoutHolder (var rootView: View) : MainFragmentLayoutHol
         playerExtendedViews.isGone = true
         bufferingIndicator.isVisible = isBuffering
         sleepTimerRunningViews.isGone = true
+        toggleTimeshiftViews()
     }
 
 
@@ -357,6 +451,7 @@ data class MainActivityLayoutHolder (var rootView: View) : MainFragmentLayoutHol
         TransitionManager.beginDelayedTransition(playerCardView, transition)
         playerExtendedViews.isVisible = true
         sleepTimerRunningViews.isGone = sheetSleepTimerRemainingTimeView.text.isEmpty()
+        toggleTimeshiftViews()
     }
 
 
@@ -368,6 +463,7 @@ data class MainActivityLayoutHolder (var rootView: View) : MainFragmentLayoutHol
         TransitionManager.beginDelayedTransition(playerCardView, transition)
         playerExtendedViews.isGone = true
         sleepTimerRunningViews.isGone = true
+        toggleTimeshiftViews()
     }
 
 

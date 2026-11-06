@@ -52,6 +52,9 @@
     <!-- player -->
     <string name="player_sheet_h2_station_metadata">Currently playing</string>
     <string name="player_sheet_h2_stream_url">Streaming link</string>
+    <string name="player_sheet_timeshift_live">Live</string>
+    <string name="player_sheet_timeshift_behind_live">%1$s behind live</string>
+    <string name="player_sheet_button_go_live">Go live</string>
     <!-- Station List -->
     <string name="station_list_button_add_new_station">Add new station</string>
     <string name="station_list_button_settings">Settings</string>
@@ -120,6 +123,10 @@
     <string name="descr_expanded_player_sleep_timer_cancel_button">Cancel sleep timer</string>
     <string name="descr_expanded_player_sleep_timer_remaining_time">Time remaining on sleep timer</string>
     <string name="descr_expanded_player_sleep_timer_start_button">Start sleep timer</string>
+    <string name="descr_expanded_player_timeshift_hour_button">Go back to the start of the hour</string>
+    <string name="descr_expanded_player_timeshift_skip_back_button">Skip back 30 seconds</string>
+    <string name="descr_expanded_player_timeshift_skip_forward_button">Skip forward 30 seconds</string>
+    <string name="descr_expanded_player_timeshift_slider">Playback position within the live stream</string>
     <string name="descr_player_station_image">Station image</string>
     <string name="descr_player_playback_button">Play/pause</string>
     <!-- Onboarding -->
@@ -137,6 +144,7 @@
     <string name="sample_text_station_name" translatable="false">Byte FM</string>
     <string name="sample_text_steam_url" translatable="false">http://bytefm.cast.addradio.de/bytefm/main/mid/stream</string>
     <string name="sample_text_sleep_timer_remaining_time" translatable="false">00:00</string>
+    <string name="sample_text_timeshift_position" translatable="false">12:34 behind live</string>
     <!-- Google Cast -->
     <string name="cast_context_error">Failed to get Cast context. Try updating Google Play Services and restart the app.</string>
 

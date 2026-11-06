@@ -190,6 +190,97 @@
             app:srcCompat="@drawable/ic_player_extended_chevron_right_24dp" />
 
         <ImageButton
+            android:id="@+id/timeshift_hour_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/descr_expanded_player_timeshift_hour_button"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/player_extended_previous_metadata_button"
+            app:srcCompat="@drawable/ic_player_extended_start_of_hour_24dp"
+            tools:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/timeshift_skip_back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/descr_expanded_player_timeshift_skip_back_button"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/timeshift_hour_button"
+            app:layout_constraintStart_toEndOf="@+id/timeshift_hour_button"
+            app:layout_constraintTop_toTopOf="@+id/timeshift_hour_button"
+            app:srcCompat="@drawable/ic_player_extended_skip_back_30_24dp"
+            tools:visibility="visible" />
+
+        <com.google.android.material.slider.Slider
+            android:id="@+id/timeshift_slider"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/descr_expanded_player_timeshift_slider"
+            android:value="1"
+            android:valueFrom="0"
+            android:valueTo="1"
+            android:visibility="gone"
+            app:labelBehavior="floating"
+            app:layout_constraintBottom_toBottomOf="@+id/timeshift_skip_back_button"
+            app:layout_constraintEnd_toStartOf="@+id/timeshift_skip_forward_button"
+            app:layout_constraintStart_toEndOf="@+id/timeshift_skip_back_button"
+            app:layout_constraintTop_toTopOf="@+id/timeshift_skip_back_button"
+            tools:visibility="visible" />
+
+        <ImageButton
+            android:id="@+id/timeshift_skip_forward_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:contentDescription="@string/descr_expanded_player_timeshift_skip_forward_button"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/timeshift_skip_back_button"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/timeshift_skip_back_button"
+            app:srcCompat="@drawable/ic_player_extended_skip_forward_30_24dp"
+            tools:visibility="visible" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/timeshift_position"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textAppearance="@style/TextAppearance.Material3.LabelMedium"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/timeshift_go_live_button"
+            app:layout_constraintEnd_toStartOf="@+id/timeshift_go_live_button"
+            app:layout_constraintStart_toStartOf="@+id/timeshift_slider"
+            app:layout_constraintTop_toTopOf="@+id/timeshift_go_live_button"
+            tools:text="@string/sample_text_timeshift_position"
+            tools:visibility="visible" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/timeshift_go_live_button"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:text="@string/player_sheet_button_go_live"
+            android:textColor="?attr/colorOnPrimaryContainer"
+            android:visibility="gone"
+            app:icon="@drawable/ic_player_extended_live_24dp"
+            app:iconSize="16dp"
+            app:iconTint="?attr/colorOnPrimaryContainer"
+            app:layout_constraintEnd_toEndOf="@+id/timeshift_slider"
+            app:layout_constraintTop_toBottomOf="@+id/timeshift_skip_back_button"
+            tools:visibility="visible" />
+
+        <ImageButton
             android:id="@+id/player_extended_copy_station_metadata_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -201,7 +292,7 @@
             android:contentDescription="@string/descr_expanded_player_metadata_copy_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/player_extended_previous_metadata_button"
+            app:layout_constraintTop_toBottomOf="@+id/timeshift_go_live_button"
             app:srcCompat="@drawable/ic_player_extended_copy_content_24dp" />
 
         <ImageButton
@@ -216,7 +307,7 @@
             android:contentDescription="@string/descr_expanded_player_sleep_timer_start_button"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/player_extended_previous_metadata_button"
+            app:layout_constraintTop_toBottomOf="@+id/timeshift_go_live_button"
             app:srcCompat="@drawable/ic_player_extended_sleep_timer_24dp" />
 
         <com.google.android.material.textview.MaterialTextView
@@ -257,6 +348,14 @@
             android:layout_height="0dp"
             android:visibility="gone"
             app:constraint_referenced_ids="player_extended_streaming_link_icon,player_extended_streaming_link_headline,player_extended_streaming_link,player_extended_previous_metadata_button,player_extended_metadata_headline,player_extended_metadata_history,player_extended_next_metadata_button,player_extended_copy_station_metadata_button,sleep_timer_start_button"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/timeshift_views"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:constraint_referenced_ids="timeshift_hour_button,timeshift_skip_back_button,timeshift_slider,timeshift_skip_forward_button,timeshift_position"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Group

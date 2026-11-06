@@ -35,6 +35,11 @@ object Keys {
     const val SLEEP_TIMER_INTERVAL: Long = 1000L            // 1 second in milliseconds
     const val RECONNECTION_WAIT_INTERVAL: Long = 5000L      // 5 seconds in milliseconds
     const val DEFAULT_TRANSITION_ANIMATION_DURATION: Long = 100L               // 100 milliseconds
+    const val TIMESHIFT_SEEK_INCREMENT: Long = 30000L       // 30 seconds in milliseconds - skip back/forward step for streams that can be rewound
+    const val TIMESHIFT_MIN_WINDOW: Long = 60000L           // 60 seconds in milliseconds - streams with a shorter live window do not get timeshift controls
+    const val TIMESHIFT_LIVE_EDGE_TOLERANCE: Long = 10000L  // 10 seconds in milliseconds - closer than this to the live edge counts as "live"
+    const val ONE_HOUR: Long = 3600000L                     // 1 hour in milliseconds
+    const val TIMESHIFT_UPDATE_INTERVAL: Long = 1000L       // 1 second in milliseconds - refresh rate of the timeshift position views
 
     // ranges
     val PLAYBACK_SPEEDS = arrayOf(1.0f, 1.2f, 1.4f, 1.6f, 1.8f, 2.0f)

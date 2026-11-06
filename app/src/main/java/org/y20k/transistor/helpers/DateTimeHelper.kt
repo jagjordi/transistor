@@ -70,6 +70,24 @@ object DateTimeHelper {
     }
 
 
+    /* Converts milliseconds into a readable format - adds hours if needed (e.g. 1:02:03 or 02:03) */
+    fun convertToHoursMinutesAndSeconds(milliseconds: Long, negativeValue: Boolean = false): String {
+        val totalSeconds: Long = milliseconds / 1000
+        val hours: Long = totalSeconds / 3600
+        val minutes: Long = totalSeconds % 3600 / 60
+        val seconds: Long = totalSeconds % 60
+        var timeString: String = "${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}"
+        if (hours > 0) {
+            timeString = "$hours:$timeString"
+        }
+        if (negativeValue) {
+            // add a minus sign if a negative values was requested
+            timeString = "-$timeString"
+        }
+        return timeString
+    }
+
+
     /* Converts RFC 2822 string representation of a date to DATE - using alternative patterns */
     private fun tryAlternativeRfc2822Parsing(dateString: String): Date {
         var date: Date = Keys.DEFAULT_DATE

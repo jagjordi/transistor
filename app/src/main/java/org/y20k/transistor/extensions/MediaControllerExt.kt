@@ -60,9 +60,9 @@ fun MediaController.requestMetadataHistory(): ListenableFuture<SessionResult> {
 
 /* Starts playback with a new media item */
 fun MediaController.play(context: Context, stationPosition: Int) {
-    // go to media item at given position in the internal play list
+    // go to media item at given position in the internal play list - start at the default position (= live edge for streams that can be rewound)
     if (stationPosition > -1) {
-        seekTo(stationPosition, 0L)
+        seekToDefaultPosition(stationPosition)
         play()
     } else {
         Toast.makeText(context, R.string.toast_message_error_station_not_found, Toast.LENGTH_SHORT).show()

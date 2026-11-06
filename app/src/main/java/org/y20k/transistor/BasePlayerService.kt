@@ -75,6 +75,7 @@ import org.y20k.transistor.helpers.AudioHelper
 import org.y20k.transistor.helpers.CollectionHelper
 import org.y20k.transistor.helpers.FileHelper
 import org.y20k.transistor.helpers.PreferencesHelper
+import org.y20k.transistor.helpers.TimeshiftHelper
 import java.util.Date
 
 
@@ -472,8 +473,8 @@ abstract class BasePlayerService: MediaLibraryService() {
                     if (player.isPlaying) {
                         return super.onPlayerCommandRequest(session, controller, playerCommand)
                     } else {
-                        // seek to the start of the "live window"
-                        player.seekTo(0)
+                        // jump to the live edge - streams that can be rewound would otherwise resume at the oldest position of the live window
+                        player.seekToDefaultPosition()
                         return SessionResult.RESULT_SUCCESS
                     }
                 }
@@ -523,6 +524,23 @@ abstract class BasePlayerService: MediaLibraryService() {
                 playCommandButton,
                 seekToNextCommandButton
             )
+            // add skip back / skip forward buttons, if the current stream can be rewound
+            if (TimeshiftHelper.isAvailable(player)) {
+                val seekBackCommandButton = CommandButton.Builder().apply {
+                    setPlayerCommand(Player.COMMAND_SEEK_BACK)
+                    setIconResId(R.drawable.ic_notification_skip_back_30_36dp)
+                    setDisplayName(getString(R.string.descr_expanded_player_timeshift_skip_back_button))
+                    setEnabled(true)
+                }.build()
+                val seekForwardCommandButton = CommandButton.Builder().apply {
+                    setPlayerCommand(Player.COMMAND_SEEK_FORWARD)
+                    setIconResId(R.drawable.ic_notification_skip_forward_30_36dp)
+                    setDisplayName(getString(R.string.descr_expanded_player_timeshift_skip_forward_button))
+                    setEnabled(true)
+                }.build()
+                commandButtons.add(1, seekBackCommandButton)
+                commandButtons.add(3, seekForwardCommandButton)
+            }
             return ImmutableList.copyOf(commandButtons)
         }
     }
@@ -624,6 +642,9 @@ abstract class BasePlayerService: MediaLibraryService() {
             setHandleAudioBecomingNoisy(true)
             setLoadControl(loadControl)
             setMediaSourceFactory(customMediaSourceFactory)
+            // skip back / skip forward step for streams that can be rewound
+            setSeekBackIncrementMs(Keys.TIMESHIFT_SEEK_INCREMENT)
+            setSeekForwardIncrementMs(Keys.TIMESHIFT_SEEK_INCREMENT)
         }.build()
         exoPlayer.addAnalyticsListener(analyticsListener)
         exoPlayer.addListener(playerListener)
@@ -645,7 +666,12 @@ abstract class BasePlayerService: MediaLibraryService() {
                 seekToPreviousMediaItem()
             }
             override fun getDuration(): Long {
-                return C.TIME_UNSET // this will hide progress bar for HLS stations in the notification
+                // expose the duration only for streams that can be rewound - this shows a seek bar in the notification for them and hides it for all other HLS stations
+                return if (TimeshiftHelper.isAvailable(exoPlayer)) super.getDuration() else C.TIME_UNSET
+            }
+            override fun seekForward() {
+                // do not seek past the live edge
+                TimeshiftHelper.skipForward(exoPlayer)
             }
         }
         player
